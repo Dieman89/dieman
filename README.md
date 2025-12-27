@@ -1,0 +1,2 @@
+# dieman
+www.dieman.dev
