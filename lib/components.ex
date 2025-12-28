@@ -4,7 +4,7 @@ defmodule Dieman.Components do
   import Temple
   alias Dieman.Data
 
-  # Text
+  # Text components
 
   def taglines do
     temple do
@@ -15,13 +15,13 @@ defmodule Dieman.Components do
     end
   end
 
-  def glitch_text(value) do
+  def glitch_text(text) do
     temple do
-      span(class: "glitch-text", data_text: value, do: "#{value}")
+      span(class: "glitch-text", data_text: text, do: text)
     end
   end
 
-  # Links
+  # Link components
 
   def links(items) do
     temple do
@@ -78,17 +78,17 @@ defmodule Dieman.Components do
         "Made with "
         span(class: "heart", do: Phoenix.HTML.raw("&#9829;"))
         " between "
-        location(left, "city-left")
+        location(left.city, left.flag, "city-left")
         " and "
-        location(right, "city-right")
+        location(right.city, right.flag, "city-right")
       end
     end
   end
 
-  defp location(%{city: city, flag: flag}, class) do
+  defp location(city, flag, class) do
     temple do
       span class: "city #{class}" do
-        city <> " "
+        "#{city} "
         Phoenix.HTML.raw(flag)
       end
     end
