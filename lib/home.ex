@@ -5,33 +5,33 @@ defmodule Dieman.Pages.Home do
     layout: Dieman.RootLayout,
     permalink: "/"
 
-  import Temple
-  alias Dieman.Components
+  use Dieman.Components
+
   alias Dieman.Data
 
   def template(_assigns) do
     temple do
       div class: "home" do
         div do
-          Components.avatar()
+          avatar()
 
           h1 do
-            Components.glitch_text(Data.name())
+            glitch_text(Data.name())
           end
 
           p class: "title" do
-            Components.taglines()
+            taglines()
           end
 
           nav class: "links" do
-            Components.nav_links()
+            nav_links()
           end
         end
 
-        Components.floating_shapes()
+        floating_shapes()
 
         footer class: "social" do
-          Components.social_links()
+          social_links()
         end
       end
     end

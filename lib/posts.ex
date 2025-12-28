@@ -6,13 +6,13 @@ defmodule Dieman.Pages.Posts do
     title: "Posts",
     permalink: "/posts"
 
-  import Temple
-  alias Dieman.Components
+  use Dieman.Components
+
   alias Dieman.Data
 
   def template(assigns) do
     temple do
-      Components.floating_symbols()
+      floating_symbols()
 
       div class: "post-list" do
         for post <- @posts do

@@ -6,6 +6,9 @@ defmodule Dieman.Data do
   @name "Alessandro Buonerba"
   @avatar "/images/avatar.jpeg"
 
+  # Display mode: :icon or :text
+  @social_display :icon
+
   # Profile
   @taglines [
     "Senior Software Engineer",
@@ -31,9 +34,10 @@ defmodule Dieman.Data do
   ]
 
   @social_links [
-    %{href: "https://github.com/Dieman89", label: "GitHub"},
-    %{href: "https://linkedin.com/in/buonerba", label: "LinkedIn"},
-    %{href: "mailto:a.buonerba@proton.me", label: "a.buonerba@proton.me"}
+    %{href: "https://github.com/Dieman89", label: "GitHub", icon: :github},
+    %{href: "https://linkedin.com/in/buonerba", label: "LinkedIn", icon: :linkedin},
+    %{href: "/feed.xml", label: "RSS", icon: :rss},
+    %{href: "mailto:a.buonerba@proton.me", label: "Email", icon: :email}
   ]
 
   # Decorative elements
@@ -58,6 +62,7 @@ defmodule Dieman.Data do
   def site_title, do: @site_title
   def name, do: @name
   def avatar, do: @avatar
+  def social_display, do: @social_display
   def taglines, do: @taglines
   def locations, do: @locations
   def no_posts, do: @no_posts

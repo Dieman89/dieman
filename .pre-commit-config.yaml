@@ -3,7 +3,7 @@ repos:
     hooks:
       - id: mix-format
         name: mix format
-        entry: mix format --check-formatted
+        entry: mix format
         language: system
         files: \.exs?$
         pass_filenames: false

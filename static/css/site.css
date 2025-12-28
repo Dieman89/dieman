@@ -1,4 +1,4 @@
-/* Monokai Pro Ristretto - Correct palette */
+/* Monokai Pro Ristretto */
 :root {
   color-scheme: dark;
   --bg: #2C2525;
@@ -97,14 +97,22 @@ div.home > .social {
   display: flex;
   gap: 1.5rem;
   font-size: 0.75rem;
+  align-items: center;
 }
 
 div.home > .social a {
   color: var(--fg-dim);
+  display: flex;
+  align-items: center;
 }
 
 div.home > .social a:hover {
   color: var(--blue);
+}
+
+div.home > .social svg {
+  width: 18px;
+  height: 18px;
 }
 
 .made-with {
@@ -361,17 +369,24 @@ div.single nav .nav-top p a[href^="/"]:hover {
 
 div.single nav .nav-bottom {
   display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 div.single nav .nav-bottom a {
   color: var(--fg-dim);
   font-size: 0.75rem;
+  display: flex;
+  align-items: center;
 }
 
 div.single nav .nav-bottom a:hover {
   color: var(--blue);
+}
+
+div.single nav .nav-bottom svg {
+  width: 16px;
+  height: 16px;
 }
 
 div.single article {

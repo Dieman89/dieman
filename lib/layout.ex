@@ -7,6 +7,11 @@ defmodule Dieman.RootLayout do
   alias Dieman.Data
 
   def template(assigns) do
+    page_title = build_title(assigns)
+    description = assigns[:page][:description] || "#{Data.name()} - #{hd(Data.taglines())}"
+    url = Dieman.absolute_url(assigns[:page][:permalink] || "/")
+    image = Dieman.absolute_url(Data.avatar())
+
     temple do
       "<!DOCTYPE html>"
 
@@ -15,13 +20,34 @@ defmodule Dieman.RootLayout do
           meta(charset: "utf-8")
           meta(name: "viewport", content: "width=device-width, initial-scale=1.0")
           meta(name: "color-scheme", content: "dark")
+          meta(name: "description", content: description)
+          meta(name: "author", content: Data.name())
 
-          title do
-            [@page[:title], Data.site_title()]
-            |> Enum.reject(&is_nil/1)
-            |> Enum.join(" | ")
-          end
+          title(do: page_title)
 
+          # Open Graph
+          meta(property: "og:type", content: og_type(assigns))
+          meta(property: "og:title", content: page_title)
+          meta(property: "og:description", content: description)
+          meta(property: "og:url", content: url)
+          meta(property: "og:image", content: image)
+          meta(property: "og:site_name", content: Data.site_title())
+
+          # Twitter Card
+          meta(name: "twitter:card", content: "summary")
+          meta(name: "twitter:title", content: page_title)
+          meta(name: "twitter:description", content: description)
+          meta(name: "twitter:image", content: image)
+
+          # RSS
+          link(
+            rel: "alternate",
+            type: "application/rss+xml",
+            title: "#{Data.site_title()} RSS",
+            href: "/feed.xml"
+          )
+
+          # Fonts
           link(rel: "preconnect", href: "https://fonts.googleapis.com")
           link(rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: true)
 
@@ -31,6 +57,7 @@ defmodule Dieman.RootLayout do
               "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
           )
 
+          # Styles & Favicon
           link(rel: "stylesheet", href: "/css/site.css")
           link(rel: "icon", type: "image/jpeg", href: Data.avatar())
         end
@@ -40,15 +67,23 @@ defmodule Dieman.RootLayout do
 
           unless @page[:date], do: Components.footer()
 
-          if Mix.env() == :dev do
-            Phoenix.HTML.raw(Tableau.live_reload(assigns))
-          end
+          Dieman.live_reload(assigns)
 
           script(src: "/js/glitch.js")
         end
       end
     end
     |> Phoenix.HTML.Safe.to_iodata()
+  end
+
+  defp build_title(assigns) do
+    [assigns[:page][:title], Data.site_title()]
+    |> Enum.reject(&is_nil/1)
+    |> Enum.join(" | ")
+  end
+
+  defp og_type(assigns) do
+    if assigns[:page][:date], do: "article", else: "website"
   end
 end
 
@@ -69,6 +104,11 @@ defmodule Dieman.PostLayout do
             if assigns[:page][:date] do
               p class: "date" do
                 Calendar.strftime(@page.date, "%b %d, %Y")
+
+                if assigns[:page][:body] do
+                  span(class: "separator", do: " · ")
+                  Components.reading_time(@page.body)
+                end
               end
             end
 

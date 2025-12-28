@@ -22,7 +22,8 @@ config :tableau, :config,
         tasklist: true,
         strikethrough: true,
         autolink: true,
-        footnotes: true
+        footnotes: true,
+        alerts: true
       ],
       render: [unsafe_: true],
       syntax_highlight: [formatter: {:html_inline, theme: "monokai_pro_ristretto"}]
