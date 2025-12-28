@@ -17,7 +17,11 @@ defmodule Dieman.Pages.Posts do
       div class: "post-list" do
         for post <- @posts do
           article class: "post-item" do
-            time(do: Calendar.strftime(post.date, "%b %d, %Y"))
+            div class: "post-meta" do
+              time(do: Calendar.strftime(post.date, "%b %d, %Y"))
+              tags(post[:tags] || [])
+            end
+
             a(href: post.permalink, do: post.title)
           end
         end

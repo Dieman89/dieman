@@ -399,12 +399,31 @@ div.single article header {
   margin-bottom: 2rem;
 }
 
+div.single article header .post-header-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+div.single article header .post-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 div.single article header .date {
   color: var(--fg-dim);
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  margin-bottom: 0.5rem;
+}
+
+div.single article header .reading-time {
+  color: var(--fg-dim);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 div.single article header h1 {
@@ -430,11 +449,27 @@ div.single article header h1 {
   gap: 0.25rem;
 }
 
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .post-item time {
   color: var(--fg-dim);
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+.tags {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tag {
+  color: var(--purple);
+  font-size: 0.7rem;
 }
 
 .post-item a {

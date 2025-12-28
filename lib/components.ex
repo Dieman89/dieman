@@ -192,4 +192,16 @@ defmodule Dieman.Components do
       span(class: "reading-time", do: "#{mins} min read")
     end
   end
+
+  def tags([_ | _] = tags) do
+    temple do
+      span class: "tags" do
+        for tag <- tags do
+          span(class: "tag", do: "##{tag}")
+        end
+      end
+    end
+  end
+
+  def tags(_), do: ""
 end

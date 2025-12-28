@@ -1,6 +1,8 @@
 ---
 title: "Go vs Scala: Two Philosophies of Parallelism"
 date: 2024-01-15
+tags:
+  - tech
 ---
 
 When building concurrent systems, the choice of language shapes not just your code, but your entire mental model. Go and Scala represent two fundamentally different philosophies: **velocity** versus **expressivity**.

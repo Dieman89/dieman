@@ -102,11 +102,16 @@ defmodule Dieman.PostLayout do
         article do
           header do
             if assigns[:page][:date] do
-              p class: "date" do
-                Calendar.strftime(@page.date, "%b %d, %Y")
+              div class: "post-header-meta" do
+                div class: "post-header-left" do
+                  span class: "date" do
+                    Calendar.strftime(@page.date, "%b %d, %Y")
+                  end
+
+                  Components.tags(@page[:tags] || [])
+                end
 
                 if assigns[:page][:body] do
-                  span(class: "separator", do: " · ")
                   Components.reading_time(@page.body)
                 end
               end
