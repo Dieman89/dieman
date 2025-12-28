@@ -1,14 +1,15 @@
 <p align="center">
-  <img src="static/images/avatar.jpeg" width="150" alt="Alessandro Buonerba" />
-</p>
-
-# dieman.dev
-
-```elixir
-:posts |> Enum.concat(:cv) |> deploy_to_web()
-```
-
-A personal site brewed with [Tableau](https://github.com/elixir-tools/tableau) and [Temple](https://github.com/mhanberg/temple).
+  <a href="https://dieman.dev">
+    <img src="static/images/avatar.jpeg" width="150" alt="dieman.dev" />
+  </a>
+  <br>
+  <a href="https://dieman.dev"><strong>dieman.dev</strong></a>
+  <br>
+  <code>:posts |> Enum.concat(:cv) |> deploy_to_web()</code>
+  <br>
+  <center>
+  A personal site brewed with <a href="https://github.com/elixir-tools/tableau">Tableau</a> and <a href="https://github.com/mhanberg/temple">Temple</a>
+</p></center>
 
 ## Setup
 
