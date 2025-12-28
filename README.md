@@ -1,19 +1,56 @@
 <p align="center">
-  <img src="assets/avatar.jpeg" width="150" alt="Alessandro Buonerba" />
+  <img src="static/images/avatar.jpeg" width="150" alt="Alessandro Buonerba" />
 </p>
 
 # dieman.dev
 
-Personal site built with [Tableau](https://github.com/elixir-tools/tableau) (Elixir static site generator).
+```elixir
+:posts |> Enum.concat(:cv) |> deploy_to_web()
+```
+
+A personal site brewed with [Tableau](https://github.com/elixir-tools/tableau) and [Temple](https://github.com/mhanberg/temple).
+
+## Setup
+
+```bash
+mix deps.get
+pre-commit install
+```
 
 ## Development
 
 ```bash
-mix deps.get
 mix tableau.server
 ```
 
 Site available at http://localhost:4999
+
+## Code Quality
+
+```bash
+# Format code
+mix format
+
+# Check formatting (CI)
+mix format --check-formatted
+
+# Lint
+mix credo
+
+# Lint strict mode
+mix credo --strict
+
+# Compile with warnings as errors
+mix compile --warnings-as-errors
+```
+
+## Production Build
+
+```bash
+MIX_ENV=prod mix build
+```
+
+Output goes to `site/`. Deployment to GitHub Pages is automatic on push to `main`.
 
 ## Writing Posts
 
@@ -21,7 +58,7 @@ Site available at http://localhost:4999
 mix dieman.gen.post "My Post Title"
 ```
 
-Or manually create `_posts/2025-01-15-my-post.md`:
+Or manually create `content/posts/2025-01-15-my-post.md`:
 
 ```markdown
 ---
@@ -34,23 +71,25 @@ Your content here with **markdown** support.
 
 | Directory | Visibility |
 |-----------|------------|
-| `_posts/` | Published (dev + prod) |
-| `_drafts/` | Draft (dev only) |
-
-## Build & Deploy
-
-```bash
-MIX_ENV=prod mix tableau.build
-```
-
-Output goes to `_site/`. Deployment to GitHub Pages is automatic on push to `main`.
+| `content/posts/` | Published (dev + prod) |
+| `content/drafts/` | Draft (dev only) |
 
 ## Structure
 
 ```
-_drafts/      # Draft posts (dev only)
-_posts/       # Published posts
-extra/css/    # Styles
-lib/layouts/  # Page layouts
-lib/pages/    # Page modules
+lib/
+├── data.ex        # Site configuration
+├── components.ex  # Reusable UI components
+├── layout.ex      # Page layouts
+├── home.ex        # Home page
+├── posts.ex       # Posts list
+├── projects.ex    # Projects page
+└── cv.ex          # CV page
+content/
+├── posts/         # Published posts
+└── drafts/        # Draft posts (dev only)
+static/
+├── css/           # Styles
+├── images/        # Images
+└── js/            # JavaScript
 ```

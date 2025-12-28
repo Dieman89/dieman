@@ -3,9 +3,8 @@ import Config
 config :tableau, :reloader,
   patterns: [
     ~r"lib/.*.ex",
-    ~r"(_posts|_pages)/.*.md",
-    ~r"(_data)/.*.(yaml|yml|exs)",
-    ~r"extra/.*.(css|js)"
+    ~r"content/.*.md",
+    ~r"static/.*"
   ]
 
 config :web_dev_utils, :reload_log, true
@@ -13,6 +12,8 @@ config :web_dev_utils, :reload_log, true
 config :tableau, :config,
   url: "https://dieman.dev",
   timezone: "America/Mexico_City",
+  include_dir: "static",
+  out_dir: "site",
   markdown: [
     mdex: [
       extension: [

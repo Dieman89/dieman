@@ -6,9 +6,7 @@
 erl_crash.dump
 *.ez
 dieman-*.tar
-/_site/
 /node_modules/
 /tmp/
-
-# IDE
 /.elixir_ls/
+/site/

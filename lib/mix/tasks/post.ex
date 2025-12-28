@@ -42,4 +42,3 @@ defmodule Mix.Tasks.Dieman.Gen.Post do
     Mix.shell().info("Succesfully created #{file_path}!")
   end
 end
-
