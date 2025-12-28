@@ -4,12 +4,9 @@
   </a>
   <br>
   <a href="https://dieman.dev"><strong>dieman.dev</strong></a>
-  <br>
+  <br><br>
   <code>:posts |> Enum.concat(:cv) |> deploy_to_web()</code>
-  <br>
-  <center>
-  A personal site brewed with <a href="https://github.com/elixir-tools/tableau">Tableau</a> and <a href="https://github.com/mhanberg/temple">Temple</a>
-</p></center>
+  <br><br>
 
 ## Setup
 
@@ -24,7 +21,7 @@ pre-commit install
 mix tableau.server
 ```
 
-Site available at http://localhost:4999
+Site available at <http://localhost:4999>
 
 ## Code Quality
 

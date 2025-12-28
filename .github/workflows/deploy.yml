@@ -3,6 +3,13 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+    paths:
+      - 'lib/**'
+      - 'content/**'
+      - 'static/**'
+      - 'config/**'
+      - 'mix.exs'
+      - 'mix.lock'
   workflow_dispatch:
 
 permissions:
