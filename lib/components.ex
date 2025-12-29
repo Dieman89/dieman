@@ -129,13 +129,17 @@ defmodule Dieman.Components do
     [left, right] = Data.locations()
 
     temple do
-      p class: "made-with" do
-        "Made with "
-        span(class: "heart", do: Phoenix.HTML.raw("&#9829;"))
-        " between "
-        location(left.city, left.flag, "city-left")
-        " and "
-        location(right.city, right.flag, "city-right")
+      footer class: "site-footer" do
+        div(class: "footer-socials", do: social_links())
+
+        p class: "made-with" do
+          "Made with "
+          span(class: "heart", do: Phoenix.HTML.raw("&#9829;"))
+          " between "
+          location(left.city, left.flag, "city-left")
+          " and "
+          location(right.city, right.flag, "city-right")
+        end
       end
     end
   end

@@ -65,7 +65,7 @@ defmodule Dieman.RootLayout do
         body do
           render(@inner_content)
 
-          unless @page[:date], do: Components.footer()
+          Components.footer()
 
           Dieman.live_reload(assigns)
 
