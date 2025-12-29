@@ -763,6 +763,8 @@ article img, article iframe, article video {
     padding-bottom: 2.5rem; /* Space for made-with footer */
     align-items: center;
     text-align: center;
+    height: 100vh;
+    overflow: hidden;
   }
 
   div.home > div {
@@ -791,9 +793,13 @@ article img, article iframe, article video {
   }
 
   div.home > .social {
-    padding-top: 0;
-    padding-bottom: 0;
+    position: fixed;
+    bottom: 2.5rem;
+    left: 0;
+    right: 0;
+    padding: 0;
     justify-content: center;
+    z-index: 100;
   }
 
   /* Single/Post layout adjustments */
@@ -801,7 +807,15 @@ article img, article iframe, article video {
     flex-direction: column;
     padding: 1rem 1.5rem 2.5rem;
     gap: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Allow scrolling on article pages with long content */
+  div.single:not(:has(.post-list)) {
+    height: auto;
     min-height: 100vh;
+    overflow: visible;
   }
 
   div.single nav {
@@ -875,6 +889,16 @@ article img, article iframe, article video {
     gap: 1.5rem;
     padding: 0.5rem 0;
     margin-top: auto;
+  }
+
+  /* Posts list page - fixed socials at bottom */
+  div.single:has(.post-list) nav .nav-bottom {
+    position: fixed;
+    bottom: 2.5rem;
+    left: 0;
+    right: 0;
+    padding: 0;
+    z-index: 100;
   }
 
   div.single article header {
