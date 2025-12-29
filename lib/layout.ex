@@ -95,9 +95,11 @@ defmodule Dieman.PostLayout do
   alias Dieman.Components
 
   def template(assigns) do
+    current_path = assigns[:page][:permalink] || "/"
+
     temple do
       div class: "single" do
-        Components.sidebar()
+        Components.sidebar(current_path)
 
         article do
           header do

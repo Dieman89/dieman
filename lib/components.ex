@@ -151,7 +151,7 @@ defmodule Dieman.Components do
 
   # Sidebar
 
-  def sidebar do
+  def sidebar(current_path \\ "/") do
     temple do
       nav do
         div class: "nav-top" do
@@ -165,7 +165,7 @@ defmodule Dieman.Components do
 
           for %{href: href, label: text} <- Data.nav_links() do
             p do
-              a(href: href, do: "#{text}")
+              a(href: href, class: nav_link_class(href, current_path), do: "#{text}")
             end
           end
         end
@@ -173,6 +173,10 @@ defmodule Dieman.Components do
         div(class: "nav-bottom", do: social_links())
       end
     end
+  end
+
+  defp nav_link_class(href, current_path) do
+    if String.starts_with?(current_path, href), do: "active", else: nil
   end
 
   # Post metadata

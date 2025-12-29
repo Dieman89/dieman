@@ -367,6 +367,10 @@ div.single nav .nav-top p a[href^="/"]:hover {
   color: var(--orange);
 }
 
+div.single nav .nav-top p a[href^="/"].active {
+  color: var(--orange);
+}
+
 div.single nav .nav-bottom {
   display: flex;
   flex-direction: row;
@@ -732,21 +736,213 @@ article img, article iframe, article video {
   animation: float-3 13s ease-in-out infinite reverse;
 }
 
-/* Responsive */
+/* Responsive - Tablet and Mobile */
 @media (max-width: 768px) {
-  div.single {
-    flex-direction: column;
+  /* Hide floating elements on mobile/tablet */
+  .floats,
+  div.home .shapes {
+    display: none;
   }
 
-  div.single nav {
-    max-width: 100%;
+  /* Move "Made with" to bottom on mobile/tablet */
+  .made-with {
+    position: fixed;
+    top: auto;
+    bottom: 0.75rem;
+    left: 0;
+    right: 0;
+    transform: none;
+    text-align: center;
+    font-size: 0.6rem;
+    white-space: nowrap;
+  }
+
+  /* Home page adjustments */
+  div.home {
+    padding: 1.5rem;
+    padding-bottom: 2.5rem; /* Space for made-with footer */
+    align-items: center;
+    text-align: center;
+  }
+
+  div.home > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   div.home h1 {
     font-size: 1.5rem;
+    margin-bottom: 0.5rem;
   }
 
-  .floats {
+  div.home .title {
+    margin-bottom: 1.25rem;
+  }
+
+  div.home .avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  div.home .links {
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  div.home > .social {
+    padding-top: 0;
+    padding-bottom: 0;
+    justify-content: center;
+  }
+
+  /* Single/Post layout adjustments */
+  div.single {
+    flex-direction: column;
+    padding: 1rem 1.5rem 2.5rem;
+    gap: 0;
+    min-height: 100vh;
+  }
+
+  div.single nav {
+    max-width: 100%;
+    position: static;
+    height: auto;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Compact nav header on mobile */
+  div.single nav .nav-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  div.single nav .nav-avatar {
     display: none;
+  }
+
+  div.single nav h1 {
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+
+  /* Hide job titles on mobile */
+  div.single nav .nav-top > p:first-of-type {
+    display: none;
+  }
+
+  /* Horizontal nav links on mobile */
+  div.single nav .nav-top > p:not(:first-of-type) {
+    display: inline;
+  }
+
+  div.single nav .nav-top > p:not(:first-of-type)::after {
+    content: " ";
+  }
+
+  /* Move social links to bottom of article on mobile */
+  div.single nav {
+    display: contents;
+  }
+
+  div.single nav .nav-top {
+    order: 1;
+  }
+
+  div.single article {
+    order: 2;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  div.single nav .nav-bottom {
+    order: 3;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1rem 0 0;
+    margin-top: auto;
+  }
+
+  div.single article header {
+    margin-bottom: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  /* Article header adjustments for mobile */
+  div.single article header .post-header-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  div.single article header h1 {
+    font-size: 1.25rem;
+    line-height: 1.6;
+  }
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 480px) {
+  div.home {
+    padding: 1rem;
+    padding-bottom: 2.5rem;
+  }
+
+  div.home h1 {
+    font-size: 1.25rem;
+  }
+
+  div.home .avatar {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+  }
+
+  div.home .title {
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  div.home .links {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  div.single {
+    padding: 1rem;
+    padding-bottom: 2.5rem;
+  }
+
+  div.single nav .nav-avatar {
+    width: 50px;
+    height: 50px;
+  }
+
+  div.single nav h1 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  div.single nav .nav-top > p:first-of-type {
+    margin-bottom: 1rem;
+  }
+
+  .post-item a {
+    font-size: 0.9rem;
+  }
+
+  /* Even smaller made-with on small phones */
+  .made-with {
+    font-size: 0.55rem;
+  }
+
+  /* Match tablet spacing for single/post pages */
+  div.single nav .nav-bottom {
+    padding: 1rem 0 0;
   }
 }
