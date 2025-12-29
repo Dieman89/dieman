@@ -358,9 +358,8 @@ div.single nav {
   flex: 1;
   max-width: 220px;
   padding-top: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
+  grid-template-rows: 1fr auto;
   position: sticky;
   top: 2rem;
   height: calc(100vh - 4rem);
@@ -798,7 +797,7 @@ article img, article iframe, article video {
   /* Hide duplicate socials on mobile */
   div.home > .social-links,
   div.single nav .nav-bottom {
-    display: none !important;
+    display: none;
   }
 
   /* Home page adjustments */
@@ -847,7 +846,7 @@ article img, article iframe, article video {
   }
 
   /* Allow scrolling on article pages with long content */
-  div.single:not(:has(.post-list)) {
+  body.page-article div.single {
     height: auto;
     min-height: 100vh;
     overflow: visible;
@@ -919,17 +918,17 @@ article img, article iframe, article video {
   }
 
   /* Article pages - site-footer at end of content */
-  body:has(.post-header-meta) {
+  body.page-article {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
   }
 
-  body:has(.post-header-meta) div.single {
+  body.page-article div.single {
     flex: 1;
   }
 
-  body:has(.post-header-meta) .site-footer {
+  body.page-article .site-footer {
     position: static;
     padding: 0 1rem 1rem 1rem;
   }
@@ -940,11 +939,11 @@ article img, article iframe, article video {
   }
 
   /* Posts list page only - remove header margin */
-  div.single article:has(.post-list) header {
+  body.page-posts div.single article header {
     margin-bottom: 0;
   }
 
-  div.single article:has(.post-list) header h1 {
+  body.page-posts div.single article header h1 {
     margin-bottom: 0;
   }
 

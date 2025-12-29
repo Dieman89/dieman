@@ -6,11 +6,31 @@ defmodule Dieman.RootLayout do
   alias Dieman.Components
   alias Dieman.Data
 
+  defp build_title(assigns) do
+    [assigns[:page][:title], Data.site_title()]
+    |> Enum.reject(&is_nil/1)
+    |> Enum.join(" | ")
+  end
+
+  defp og_type(assigns) do
+    if assigns[:page][:date], do: "article", else: "website"
+  end
+
+  defp page_class(assigns) do
+    cond do
+      assigns[:page][:permalink] == "/" -> "page-home"
+      assigns[:page][:permalink] == "/posts" -> "page-posts"
+      assigns[:page][:date] -> "page-article"
+      true -> "page-single"
+    end
+  end
+
   def template(assigns) do
     page_title = build_title(assigns)
     description = assigns[:page][:description] || "#{Data.name()} - #{hd(Data.taglines())}"
     url = Dieman.absolute_url(assigns[:page][:permalink] || "/")
     image = Dieman.absolute_url(Data.avatar())
+    body_class = page_class(assigns)
 
     temple do
       "<!DOCTYPE html>"
@@ -62,7 +82,7 @@ defmodule Dieman.RootLayout do
           link(rel: "icon", type: "image/jpeg", href: Data.avatar())
         end
 
-        body do
+        body class: body_class do
           render(@inner_content)
 
           Components.footer()
@@ -74,16 +94,6 @@ defmodule Dieman.RootLayout do
       end
     end
     |> Phoenix.HTML.Safe.to_iodata()
-  end
-
-  defp build_title(assigns) do
-    [assigns[:page][:title], Data.site_title()]
-    |> Enum.reject(&is_nil/1)
-    |> Enum.join(" | ")
-  end
-
-  defp og_type(assigns) do
-    if assigns[:page][:date], do: "article", else: "website"
   end
 end
 
