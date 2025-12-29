@@ -1,6 +1,8 @@
 defmodule Mix.Tasks.Dieman.Gen.Post do
   use Mix.Task
 
+  alias Dieman.Settings
+
   @shortdoc "Generate a new post"
   @moduledoc @shortdoc
 
@@ -12,7 +14,7 @@ defmodule Mix.Tasks.Dieman.Gen.Post do
 
     post_title = Enum.join(argv, " ")
     post_date = Date.utc_today()
-    post_time = "01:00:00 -04:00"
+    post_time = Settings.default_post_time()
 
     file_name =
       post_title
@@ -22,7 +24,7 @@ defmodule Mix.Tasks.Dieman.Gen.Post do
       |> String.downcase()
 
     file_path =
-      "./_posts/#{post_date}-#{file_name}.md"
+      "./content/posts/#{post_date}-#{file_name}.md"
 
     if File.exists?(file_path) do
       raise "File already exists"

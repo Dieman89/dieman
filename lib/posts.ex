@@ -9,6 +9,7 @@ defmodule Dieman.Pages.Posts do
   use Dieman.Components
 
   alias Dieman.Data
+  alias Dieman.Settings
 
   def template(assigns) do
     temple do
@@ -18,7 +19,7 @@ defmodule Dieman.Pages.Posts do
         for post <- @posts do
           article class: "post-item" do
             div class: "post-meta" do
-              time(do: Calendar.strftime(post.date, "%b %d, %Y"))
+              time(do: Calendar.strftime(post.date, Settings.date_format()))
               tags(post[:tags] || [])
             end
 

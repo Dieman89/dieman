@@ -77,7 +77,7 @@ The `parTraverse` function applies an effectful operation to each element in par
 
 Running both on CI revealed the velocity gap:
 
-```
+```md
 Implementation       Build + Run Time
 ─────────────────────────────────────
 Go                          5 seconds

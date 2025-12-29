@@ -5,6 +5,7 @@ defmodule Dieman.RootLayout do
   import Temple
   alias Dieman.Components
   alias Dieman.Data
+  alias Dieman.Settings
 
   defp build_title(assigns) do
     [assigns[:page][:title], Data.site_title()]
@@ -68,17 +69,14 @@ defmodule Dieman.RootLayout do
           )
 
           # Fonts
-          link(rel: "preconnect", href: "https://fonts.googleapis.com")
-          link(rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: true)
+          for url <- Settings.font_preconnect() do
+            link(rel: "preconnect", href: url, crossorigin: url =~ "gstatic")
+          end
 
-          link(
-            rel: "stylesheet",
-            href:
-              "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
-          )
+          link(rel: "stylesheet", href: Settings.font_stylesheet())
 
           # Styles & Favicon
-          link(rel: "stylesheet", href: "/css/site.css")
+          link(rel: "stylesheet", href: Settings.stylesheet())
           link(rel: "icon", type: "image/jpeg", href: Data.avatar())
         end
 
@@ -89,7 +87,7 @@ defmodule Dieman.RootLayout do
 
           Dieman.live_reload(assigns)
 
-          script(src: "/js/glitch.js")
+          script(src: Settings.glitch_script())
         end
       end
     end
@@ -103,6 +101,7 @@ defmodule Dieman.PostLayout do
   use Tableau.Layout, layout: Dieman.RootLayout
   import Temple
   alias Dieman.Components
+  alias Dieman.Settings
 
   def template(assigns) do
     current_path = assigns[:page][:permalink] || "/"
@@ -117,7 +116,7 @@ defmodule Dieman.PostLayout do
               div class: "post-header-meta" do
                 div class: "post-header-left" do
                   span class: "date" do
-                    Calendar.strftime(@page.date, "%b %d, %Y")
+                    Calendar.strftime(@page.date, Settings.date_format())
                   end
 
                   Components.tags(@page[:tags] || [])

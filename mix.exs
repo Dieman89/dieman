@@ -29,7 +29,9 @@ defmodule Dieman.MixProject do
 
   defp aliases do
     [
-      build: ["tableau.build"]
+      build: ["tableau.build"],
+      start: ["tableau.server"],
+      lint: ["credo --strict"]
     ]
   end
 end

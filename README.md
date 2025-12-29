@@ -1,12 +1,10 @@
 <p align="center">
   <a href="https://dieman.dev">
-    <img src="static/images/avatar.jpeg" width="150" alt="dieman.dev" />
+    <img src="static/images/site.png" alt="dieman.dev" />
   </a>
-  <br>
-  <a href="https://dieman.dev"><strong>dieman.dev</strong></a>
   <br><br>
   <code>:posts |> Enum.concat(:cv) |> deploy_to_web()</code>
-  <br><br>
+</p>
 
 ## Setup
 
@@ -18,29 +16,10 @@ pre-commit install
 ## Development
 
 ```bash
-mix tableau.server
+mix start
 ```
 
 Site available at <http://localhost:4999>
-
-## Code Quality
-
-```bash
-# Format code
-mix format
-
-# Check formatting (CI)
-mix format --check-formatted
-
-# Lint
-mix credo
-
-# Lint strict mode
-mix credo --strict
-
-# Compile with warnings as errors
-mix compile --warnings-as-errors
-```
 
 ## Production Build
 
@@ -56,17 +35,6 @@ Output goes to `site/`. Deployment to GitHub Pages is automatic on push to `main
 mix dieman.gen.post "My Post Title"
 ```
 
-Or manually create `content/posts/2025-01-15-my-post.md`:
-
-```markdown
----
-title: My Post Title
-date: 2025-01-15
----
-
-Your content here with **markdown** support.
-```
-
 | Directory | Visibility |
 |-----------|------------|
 | `content/posts/` | Published (dev + prod) |
@@ -76,18 +44,25 @@ Your content here with **markdown** support.
 
 ```
 lib/
-├── data.ex        # Site configuration
+├── dieman.ex      # Core utilities
+├── data.ex        # Site content (name, links, taglines)
+├── settings.ex    # Configuration (fonts, icons, date format)
 ├── components.ex  # Reusable UI components
-├── layout.ex      # Page layouts
+├── layout.ex      # RootLayout + PostLayout
 ├── home.ex        # Home page
 ├── posts.ex       # Posts list
 ├── projects.ex    # Projects page
 └── cv.ex          # CV page
-content/
-├── posts/         # Published posts
-└── drafts/        # Draft posts (dev only)
 static/
-├── css/           # Styles
-├── images/        # Images
-└── js/            # JavaScript
+├── css/site.css   # Styles
+├── js/glitch.js   # Glitch text effect
+├── svg/           # Social icons (github, linkedin, rss, email)
+└── images/        # Avatar and assets
+```
+
+## Code Quality
+
+```bash
+mix format   # Format code
+mix lint     # Lint (credo --strict)
 ```
