@@ -811,12 +811,19 @@ article img, article iframe, article video {
     margin-bottom: 0.5rem;
   }
 
-  /* Compact nav header on mobile */
+  /* Compact nav header on mobile - fixed at top */
   div.single nav .nav-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background-color: var(--bg);
+    z-index: 100;
   }
 
   div.single nav .nav-avatar {
@@ -855,21 +862,37 @@ article img, article iframe, article video {
     order: 2;
     max-width: 100%;
     margin: 0;
+    margin-top: 3.5rem;
     padding: 0;
+    padding-left: 0.7rem;
   }
 
   div.single nav .nav-bottom {
-    order: 3;
+    position: fixed;
+    bottom: 2.5rem;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: center;
     gap: 1.5rem;
-    padding: 1rem 0 0;
-    margin-top: auto;
+    padding: 0;
+    z-index: 100;
   }
 
   div.single article header {
-    margin-bottom: 1.25rem;
-    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  div.single article .post-list {
+    padding-left: 0;
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  div.single article .post-item {
+    padding-left: 0;
+    margin-left: 0;
   }
 
   /* Article header adjustments for mobile */
@@ -882,7 +905,9 @@ article img, article iframe, article video {
 
   div.single article header h1 {
     font-size: 1.25rem;
-    line-height: 1.6;
+    line-height: 1.2;
+    margin-left: 0;
+    margin-bottom: 0;
   }
 }
 
@@ -941,8 +966,13 @@ article img, article iframe, article video {
     font-size: 0.55rem;
   }
 
-  /* Match tablet spacing for single/post pages */
+  /* Match phone container padding */
+  div.single nav .nav-top {
+    padding: 1rem;
+  }
+
+  /* Match tablet - keep fixed position */
   div.single nav .nav-bottom {
-    padding: 1rem 0 0;
+    bottom: 2.5rem;
   }
 }
