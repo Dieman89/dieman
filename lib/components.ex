@@ -130,7 +130,7 @@ defmodule Dieman.Components do
 
     temple do
       footer class: "site-footer" do
-        div(class: "footer-socials", do: social_links())
+        div(class: "social-links", do: social_links())
 
         p class: "made-with" do
           "Made with "
@@ -167,14 +167,16 @@ defmodule Dieman.Components do
 
           p(do: taglines())
 
-          for %{href: href, label: text} <- Data.nav_links() do
-            p do
-              a(href: href, class: nav_link_class(href, current_path), do: "#{text}")
+          ul class: "nav-links" do
+            for %{href: href, label: text} <- Data.nav_links() do
+              li do
+                a(href: href, class: nav_link_class(href, current_path), do: "#{text}")
+              end
             end
           end
         end
 
-        div(class: "nav-bottom", do: social_links())
+        div(class: "nav-bottom social-links", do: social_links())
       end
     end
   end

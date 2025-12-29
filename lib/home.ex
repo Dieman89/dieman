@@ -30,7 +30,7 @@ defmodule Dieman.Pages.Home do
 
         floating_shapes()
 
-        footer class: "social" do
+        footer class: "social-links" do
           social_links()
         end
       end
