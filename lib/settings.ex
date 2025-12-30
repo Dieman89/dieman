@@ -16,19 +16,24 @@ defmodule Dieman.Settings do
   @font_preconnect ["https://fonts.googleapis.com", "https://fonts.gstatic.com"]
   @font_stylesheet "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
 
+  # CV Protection - set CV_PASSWORD env var to enable protection
+  @cv_password System.get_env("CV_PASSWORD")
+  @cv_protected @cv_password != nil
+  @cv_password_hash if @cv_protected,
+                      do: :crypto.hash(:sha256, @cv_password) |> Base.encode16(case: :lower),
+                      else: nil
+
   # Icons - read from static/svg at compile time
   @svg_dir Path.expand("../static/svg", __DIR__)
-  @external_resource Path.join(@svg_dir, "github.svg")
-  @external_resource Path.join(@svg_dir, "linkedin.svg")
-  @external_resource Path.join(@svg_dir, "rss.svg")
-  @external_resource Path.join(@svg_dir, "calendar.svg")
+  @icon_names ~w(github linkedin rss calendar)a
 
-  @icons %{
-    github: File.read!(Path.join(@svg_dir, "github.svg")),
-    linkedin: File.read!(Path.join(@svg_dir, "linkedin.svg")),
-    rss: File.read!(Path.join(@svg_dir, "rss.svg")),
-    calendar: File.read!(Path.join(@svg_dir, "calendar.svg"))
-  }
+  for name <- @icon_names do
+    @external_resource Path.join(@svg_dir, "#{name}.svg")
+  end
+
+  @icons Map.new(@icon_names, fn name ->
+           {name, File.read!(Path.join(@svg_dir, "#{name}.svg"))}
+         end)
 
   # Accessors
   def date_format, do: @date_format
@@ -39,4 +44,6 @@ defmodule Dieman.Settings do
   def font_preconnect, do: @font_preconnect
   def font_stylesheet, do: @font_stylesheet
   def icon(name), do: @icons[name]
+  def cv_protected?, do: @cv_protected
+  def cv_password_hash, do: @cv_password_hash
 end

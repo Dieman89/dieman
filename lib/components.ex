@@ -46,11 +46,7 @@ defmodule Dieman.Components do
     temple do
       for link <- Data.social_links() do
         a href: link.href, title: link.label, aria_label: link.label do
-          if Data.social_display() == :icon do
-            icon(link.icon)
-          else
-            "#{link.label}"
-          end
+          icon(link.icon)
         end
       end
     end

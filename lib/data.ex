@@ -6,9 +6,6 @@ defmodule Dieman.Data do
   @name "Alessandro Buonerba"
   @avatar "/images/avatar.jpeg"
 
-  # Display mode: :icon or :text
-  @social_display :icon
-
   # Profile
   @taglines [
     "Senior Software Engineer",
@@ -58,11 +55,33 @@ defmodule Dieman.Data do
     %{symbol: "for_each", label: "Iteration"}
   ]
 
+  # Projects
+  @projects [
+    %{
+      title: "Systems",
+      description: "Declarative macOS configuration using nix-darwin and home-manager.",
+      image: "/images/projects/systems.png",
+      repo: "https://github.com/Dieman89/systems",
+      date: ~D[2025-12-18],
+      tags: ["macOS", "dotfiles"],
+      tech: ["Nix"]
+    },
+    %{
+      title: "Zen Monokai Ristretto",
+      description:
+        "A warm, coffee-inspired dark theme for Zen Browser based on the Monokai Pro Ristretto color palette.",
+      image: "/images/projects/zen-monokai-ristretto.png",
+      repo: "https://github.com/Dieman89/zen-monokai-ristretto",
+      date: ~D[2025-12-28],
+      tags: ["Theme", "Zen Browser"],
+      tech: ["CSS"]
+    }
+  ]
+
   # Accessors
   def site_title, do: @site_title
   def name, do: @name
   def avatar, do: @avatar
-  def social_display, do: @social_display
   def taglines, do: @taglines
   def locations, do: @locations
   def no_posts, do: @no_posts
@@ -70,5 +89,6 @@ defmodule Dieman.Data do
   def nav_links, do: @nav_links
   def social_links, do: @social_links
   def keywords, do: @keywords
+  def projects, do: @projects
   def symbols, do: @symbols
 end

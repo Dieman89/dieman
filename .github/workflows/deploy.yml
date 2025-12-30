@@ -50,6 +50,8 @@ jobs:
 
       - name: Build site
         run: MIX_ENV=prod mix build
+        env:
+          CV_PASSWORD: ${{ secrets.CV_PASSWORD }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4

@@ -21,6 +21,7 @@ defmodule Dieman.RootLayout do
     cond do
       assigns[:page][:permalink] == "/" -> "page-home"
       assigns[:page][:permalink] == "/posts" -> "page-posts"
+      assigns[:page][:permalink] == "/projects" -> "page-projects"
       assigns[:page][:date] -> "page-article"
       true -> "page-single"
     end
