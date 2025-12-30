@@ -21,13 +21,13 @@ defmodule Dieman.Settings do
   @external_resource Path.join(@svg_dir, "github.svg")
   @external_resource Path.join(@svg_dir, "linkedin.svg")
   @external_resource Path.join(@svg_dir, "rss.svg")
-  @external_resource Path.join(@svg_dir, "email.svg")
+  @external_resource Path.join(@svg_dir, "calendar.svg")
 
   @icons %{
     github: File.read!(Path.join(@svg_dir, "github.svg")),
     linkedin: File.read!(Path.join(@svg_dir, "linkedin.svg")),
     rss: File.read!(Path.join(@svg_dir, "rss.svg")),
-    email: File.read!(Path.join(@svg_dir, "email.svg"))
+    calendar: File.read!(Path.join(@svg_dir, "calendar.svg"))
   }
 
   # Accessors
