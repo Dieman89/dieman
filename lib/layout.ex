@@ -27,11 +27,23 @@ defmodule Dieman.RootLayout do
     end
   end
 
+  defp og_image(assigns) do
+    permalink = assigns[:page][:permalink] || "/"
+
+    # For posts, check if OG image exists
+    if assigns[:page][:date] && String.starts_with?(permalink, "/posts/") do
+      slug = String.trim_leading(permalink, "/posts/")
+      Dieman.absolute_url("/og/#{slug}.png")
+    else
+      Dieman.absolute_url(Data.avatar())
+    end
+  end
+
   def template(assigns) do
     page_title = build_title(assigns)
     description = assigns[:page][:description] || "#{Data.name()} - #{hd(Data.taglines())}"
     url = Dieman.absolute_url(assigns[:page][:permalink] || "/")
-    image = Dieman.absolute_url(Data.avatar())
+    image = og_image(assigns)
     body_class = page_class(assigns)
 
     temple do

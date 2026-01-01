@@ -34,6 +34,11 @@ jobs:
           otp-version: "28"
           elixir-version: "1.19"
 
+      - name: Install libvips and JetBrains Mono
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libvips-dev fonts-jetbrains-mono
+
       - name: Cache Mix deps
         uses: actions/cache@v4
         with:
