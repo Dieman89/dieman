@@ -88,6 +88,7 @@
 
   function updateCount() {
     countEl.textContent = totalCount > 0 ? totalCount : "";
+    countEl.style.display = totalCount > 0 ? "" : "none";
     if (totalCount > 0) {
       countEl.classList.remove("pop");
       void countEl.offsetWidth;

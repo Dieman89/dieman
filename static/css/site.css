@@ -793,13 +793,18 @@ article pre code ::selection {
 
 .heart-count {
   position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 0.25rem;
-  font-size: 0.65rem;
-  color: var(--fg-muted);
-  opacity: 0.6;
+  top: -8px;
+  right: -8px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  font-size: 0.6rem;
+  line-height: 18px;
+  text-align: center;
+  color: var(--fg);
+  background: var(--bg-2);
+  border-radius: 9px;
+  border: 1px solid var(--bg-1);
 }
 
 .heart-count.pop {
