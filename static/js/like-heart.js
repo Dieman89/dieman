@@ -127,11 +127,10 @@
       clicks++;
       localStorage.setItem(storageKey, clicks.toString());
       updateHeart();
-      heart.classList.add("pulse");
-      setTimeout(() => heart.classList.remove("pulse"), 300);
 
       if (clicks === maxClicks) {
-        heart.classList.add("complete");
+        heart.classList.add("circle-complete");
+        setTimeout(() => heart.classList.remove("circle-complete"), 600);
         createParticles();
         incrementCount();
       }
