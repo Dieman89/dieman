@@ -21,9 +21,9 @@ defmodule Dieman.Settings do
   @font_preconnect ["https://fonts.googleapis.com", "https://fonts.gstatic.com"]
   @font_stylesheet "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
 
-  # Icons - read from static/svg at compile time
+  # Icons
   @svg_dir Path.expand("../static/svg", __DIR__)
-  @icon_names ~w(github linkedin rss calendar)a
+  @icon_names ~w(github linkedin rss calendar discord)a
 
   for name <- @icon_names do
     @external_resource Path.join(@svg_dir, "#{name}.svg")

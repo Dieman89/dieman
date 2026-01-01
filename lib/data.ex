@@ -34,7 +34,8 @@ defmodule Dieman.Data do
     %{href: "https://github.com/Dieman89", label: "GitHub", icon: :github},
     %{href: "https://linkedin.com/in/buonerba", label: "LinkedIn", icon: :linkedin},
     %{href: "/feed.xml", label: "RSS", icon: :rss},
-    %{href: "https://fantastical.app/dieman/meet-with-alessandro", label: "Meet", icon: :calendar}
+    %{href: "https://fantastical.app/dieman/meet-with-alessandro", label: "Meet", icon: :calendar},
+    %{href: "https://discord.gg/ZdRkrMx6UX", label: "Discord", icon: :discord}
   ]
 
   # Decorative elements
