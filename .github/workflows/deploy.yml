@@ -56,6 +56,12 @@ jobs:
       - name: Build site
         run: MIX_ENV=prod mix build
 
+      - name: Mask CV hash
+        run: |
+          if [ -f site/_d.txt ]; then
+            echo "::add-mask::$(cat site/_d.txt)"
+          fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:

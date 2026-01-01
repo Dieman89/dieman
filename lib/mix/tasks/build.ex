@@ -77,7 +77,7 @@ defmodule Mix.Tasks.Dieman.Build do
 
       File.rename!(source, target)
       File.write!(hash_file, hash)
-      Mix.shell().info("CV protected: /cv-#{hash}.pdf")
+      Mix.shell().info("CV protected")
     else
       Mix.shell().info("Warning: #{source} not found")
     end
