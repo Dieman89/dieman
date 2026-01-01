@@ -784,7 +784,8 @@ article pre code ::selection {
   opacity: 0;
 }
 
-.like-heart::after {
+.like-heart::after,
+.back-to-top::after {
   content: "";
   position: absolute;
   inset: -3px;
@@ -796,7 +797,8 @@ article pre code ::selection {
   pointer-events: none;
 }
 
-.like-heart.circle-complete::after {
+.like-heart.circle-complete::after,
+.back-to-top.circle-complete::after {
   opacity: 1;
   animation: circleAround 0.6s ease-out forwards;
 }
@@ -959,6 +961,68 @@ article blockquote {
   color: var(--fg-dim);
   font-style: italic;
   margin: 1rem 0;
+}
+
+article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  border: 1px solid var(--bg-2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+article th,
+article td {
+  padding: 0.6rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--bg-2);
+}
+
+article th {
+  color: var(--fg);
+  font-weight: 700;
+  background: var(--bg-1);
+  border-bottom: 2px solid var(--orange);
+}
+
+article th:last-child {
+  text-align: right;
+}
+
+article tr:hover {
+  background: var(--bg-1);
+}
+
+article tbody tr:first-child {
+  background: linear-gradient(90deg, rgba(173, 216, 150, 0.1) 0%, transparent 50%);
+  border-left: 3px solid var(--green);
+}
+
+article tbody tr:first-child td:first-child {
+  color: var(--green);
+  font-weight: 700;
+  padding-left: calc(1rem - 3px);
+}
+
+article tbody tr:first-child td:last-child {
+  color: var(--green);
+  font-weight: 700;
+}
+
+article tbody tr:not(:first-child) td:first-child {
+  color: var(--fg-muted);
+}
+
+article tbody tr:not(:first-child) td:last-child {
+  color: var(--red);
+  opacity: 0.8;
+}
+
+article td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 article img, article iframe, article video {

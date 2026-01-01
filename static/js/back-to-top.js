@@ -6,6 +6,8 @@
   button.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>`;
 
   button.addEventListener("click", () => {
+    button.classList.add("circle-complete");
+    setTimeout(() => button.classList.remove("circle-complete"), 600);
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
