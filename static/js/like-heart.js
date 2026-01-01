@@ -140,4 +140,14 @@
   heart.addEventListener("click", handleClick);
   updateHeart();
   fetchCount();
+
+  function checkVisibility() {
+    const articleRect = article.getBoundingClientRect();
+    const nearEnd = articleRect.bottom <= window.innerHeight + 100;
+    heart.classList.toggle("visible", nearEnd);
+  }
+
+  window.addEventListener("scroll", checkVisibility);
+  window.addEventListener("resize", checkVisibility);
+  checkVisibility();
 })();

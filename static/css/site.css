@@ -722,33 +722,36 @@ article pre code ::selection {
 
 .like-heart {
   position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  left: min(calc(2rem + 220px + 2rem + 700px + 0.75rem + 2px), calc(100vw - 3rem));
-  background: none;
-  border: none;
+  bottom: calc(2rem + 36px + 1rem);
+  left: min(calc(2rem + 220px + 2rem + 700px + 0.75rem), calc(100vw - 3rem));
   cursor: pointer;
-  padding: 0;
   z-index: 100;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  background: var(--bg-1);
+  border: 1px solid var(--bg-2);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.4;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.like-heart.visible {
+  opacity: 1;
+  visibility: visible;
 }
 
 .like-heart:hover {
-  opacity: 1;
+  background: var(--bg-2);
+  border-color: var(--red);
 }
 
 .like-heart:hover svg {
   transform: scale(1.1);
-}
-
-.like-heart svg {
-  transition: transform 0.2s ease;
 }
 
 .like-heart.pulse {
@@ -756,20 +759,21 @@ article pre code ::selection {
 }
 
 .like-heart svg {
+  width: 100%;
+  height: 100%;
   display: block;
   overflow: visible;
-  filter: drop-shadow(2px 3px 3px rgba(0, 0, 0, 0.4));
+  transition: transform 0.2s ease;
 }
 
 .like-heart .heart-bg {
-  fill: var(--bg-1);
-  stroke: var(--red);
-  stroke-width: 1;
-  opacity: 0.6;
+  fill: none;
+  stroke: var(--fg-dim);
+  stroke-width: 1.5;
 }
 
 .like-heart .heart-fill {
-  fill: url(#heart-gradient);
+  fill: var(--fg-dim);
   clip-path: inset(100% 0 0 0);
   transition: clip-path 0.3s ease;
 }
@@ -781,6 +785,10 @@ article pre code ::selection {
 
 .like-heart[data-filled="true"] .heart-bg {
   opacity: 0;
+}
+
+.like-heart:hover .heart-bg {
+  stroke: var(--red);
 }
 
 .heart-count {
@@ -1355,18 +1363,11 @@ a.project-image:hover img {
     display: none;
   }
 
-  /* Position heart on mobile */
+  /* Position back-to-top and heart on mobile */
+  .back-to-top,
   .like-heart {
-    position: absolute;
-    top: 5rem;
-    right: 5rem;
     left: auto;
-    bottom: auto;
-    transform: none;
-  }
-
-  .like-heart:hover {
-    transform: scale(1.1);
+    right: 1rem;
   }
 
   /* Show site-footer on mobile, hide individual socials */
