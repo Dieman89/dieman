@@ -7,81 +7,45 @@ defmodule Dieman.Pages.Cv do
     permalink: "/cv"
 
   import Temple
-  alias Dieman.Settings
+
+  @turnstile_site_key "0x4AAAAAACJ_gDdA-hbW69YJ"
 
   def template(_assigns) do
-    if Settings.cv_protected?() do
-      protected_template()
-    else
-      unprotected_template()
-    end
-  end
+    site_key = @turnstile_site_key
 
-  defp protected_template do
     temple do
       div class: "cv-viewer" do
-        div class: "cv-locked" do
-          div class: "cv-overlay" do
-            div class: "cv-lock-icon" do
-              Phoenix.HTML.raw("&#128274;")
-            end
-
-            p(class: "cv-lock-text", do: "Enter password to view CV")
-
-            input(
-              type: "password",
-              id: "cv-password",
-              class: "cv-password-input",
-              placeholder: "Password",
-              autocomplete: "off"
-            )
-
-            button(class: "cv-unlock-btn", onclick: "unlockCV()", do: "Unlock")
-            p(class: "cv-error", id: "cv-error")
-          end
-
+        div class: "cv-locked", id: "cv-locked" do
           div class: "cv-blurred" do
-            Phoenix.HTML.raw(
-              ~s(<object data="/cv.pdf" type="application/pdf" class="cv-embed"><p>PDF viewer not supported</p></object>)
+            img(src: "/images/cv-blur.png", alt: "CV Preview", class: "cv-blur-image")
+          end
+
+          div class: "cv-captcha" do
+            div(
+              class: "cf-turnstile",
+              data_sitekey: site_key,
+              data_callback: "onCaptchaSuccess",
+              data_theme: "dark"
             )
           end
         end
 
-        div class: "cv-unlocked", style: "display: none;" do
+        div class: "cv-unlocked", id: "cv-unlocked", style: "display: none;" do
           a(
-            href: "/cv.pdf",
+            href: "#",
             download: "Alessandro_Buonerba_CV.pdf",
             class: "cv-download",
             do: "Download PDF"
           )
 
           Phoenix.HTML.raw(
-            ~s(<object data="/cv.pdf" type="application/pdf" class="cv-embed"><p>Unable to display PDF. <a href="/cv.pdf">Download it instead</a></p></object>)
+            ~s(<object data="" type="application/pdf" class="cv-embed"><p>Unable to display PDF.</p></object>)
           )
         end
       end
 
-      Phoenix.HTML.raw(~s(<script>window.CV_HASH="#{Settings.cv_password_hash()}";</script>))
+      script(src: "https://challenges.cloudflare.com/turnstile/v0/api.js", async: true)
       script(src: "/js/cv.js")
-    end
-  end
-
-  defp unprotected_template do
-    temple do
-      div class: "cv-viewer" do
-        div class: "cv-unlocked", style: "display: flex;" do
-          a(
-            href: "/cv.pdf",
-            download: "Alessandro_Buonerba_CV.pdf",
-            class: "cv-download",
-            do: "Download PDF"
-          )
-
-          Phoenix.HTML.raw(
-            ~s(<object data="/cv.pdf" type="application/pdf" class="cv-embed"><p>Unable to display PDF. <a href="/cv.pdf">Download it instead</a></p></object>)
-          )
-        end
-      end
     end
   end
 end

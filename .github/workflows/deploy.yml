@@ -53,6 +53,13 @@ jobs:
         env:
           CV_PASSWORD: ${{ secrets.CV_PASSWORD }}
 
+      - name: Mask CV hash in logs
+        run: |
+          if [ -f site/cv-hash.txt ]; then
+            HASH=$(cat site/cv-hash.txt)
+            echo "::add-mask::$HASH"
+          fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:

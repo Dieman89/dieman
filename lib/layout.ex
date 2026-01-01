@@ -56,7 +56,7 @@ defmodule Dieman.RootLayout do
           meta(property: "og:site_name", content: Data.site_title())
 
           # Twitter Card
-          meta(name: "twitter:card", content: "summary")
+          meta(name: "twitter:card", content: "summary_large_image")
           meta(name: "twitter:title", content: page_title)
           meta(name: "twitter:description", content: description)
           meta(name: "twitter:image", content: image)

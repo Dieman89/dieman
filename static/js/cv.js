@@ -1,37 +1,32 @@
-async function unlockCV() {
-  const password = document.getElementById('cv-password').value;
-  const hash = await sha256(password);
-
-  if (hash === window.CV_HASH) {
-    document.querySelector('.cv-locked').style.display = 'none';
-    document.querySelector('.cv-unlocked').style.display = 'flex';
-    sessionStorage.setItem('cv-unlocked', 'true');
-  } else {
-    document.getElementById('cv-error').textContent = 'Incorrect password';
-    document.getElementById('cv-password').value = '';
+// Cloudflare Turnstile callback
+async function onCaptchaSuccess(token) {
+  try {
+    const response = await fetch('/_d.txt');
+    const hash = (await response.text()).trim();
+    const cvUrl = `/cv-${hash}.pdf`;
+    showCV(cvUrl);
+    sessionStorage.setItem('cv-url', cvUrl);
+  } catch (e) {
+    // Fallback if no hash file
+    showCV('/cv.pdf');
   }
 }
 
-async function sha256(str) {
-  const buffer = new TextEncoder().encode(str);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
-  return Array.from(new Uint8Array(hashBuffer))
-    .map(b => b.toString(16).padStart(2, '0'))
-    .join('');
+function showCV(cvUrl) {
+  document.getElementById('cv-locked').style.display = 'none';
+  document.getElementById('cv-unlocked').style.display = 'flex';
+
+  const embed = document.querySelector('.cv-embed');
+  const downloadLink = document.querySelector('.cv-download');
+
+  if (embed) embed.data = cvUrl;
+  if (downloadLink) downloadLink.href = cvUrl;
 }
 
+// Check if already verified this session
 document.addEventListener('DOMContentLoaded', function() {
-  const input = document.getElementById('cv-password');
-  if (input) {
-    input.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') unlockCV();
-    });
-  }
-
-  if (sessionStorage.getItem('cv-unlocked') === 'true') {
-    const locked = document.querySelector('.cv-locked');
-    const unlocked = document.querySelector('.cv-unlocked');
-    if (locked) locked.style.display = 'none';
-    if (unlocked) unlocked.style.display = 'flex';
+  const savedUrl = sessionStorage.getItem('cv-url');
+  if (savedUrl) {
+    showCV(savedUrl);
   }
 });
