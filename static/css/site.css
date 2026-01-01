@@ -58,6 +58,7 @@ body {
   color: var(--fg);
   line-height: 1.6;
   font-size: var(--text-base);
+  position: relative;
 }
 
 a {
@@ -1354,6 +1355,20 @@ a.project-image:hover img {
     display: none;
   }
 
+  /* Position heart on mobile */
+  .like-heart {
+    position: absolute;
+    top: 5rem;
+    right: 5rem;
+    left: auto;
+    bottom: auto;
+    transform: none;
+  }
+
+  .like-heart:hover {
+    transform: scale(1.1);
+  }
+
   /* Show site-footer on mobile, hide individual socials */
   .site-footer {
     display: block;
@@ -1479,7 +1494,7 @@ a.project-image:hover img {
     gap: 0.75rem;
     padding: 1rem 1.5rem;
     background-color: var(--bg);
-    z-index: 100;
+    z-index: 200;
   }
 
   div.single nav .nav-avatar {
