@@ -11,7 +11,8 @@ defmodule Mix.Tasks.Dieman.Build do
     :inets.start()
     :ssl.start()
 
-    generate_og_images()
+    if Mix.env() == :prod, do: generate_og_images()
+
     Mix.Task.run("tableau.build")
     protect_cv()
   end
