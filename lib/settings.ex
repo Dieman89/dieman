@@ -11,6 +11,10 @@ defmodule Dieman.Settings do
   # Assets
   @stylesheet "/css/site.css"
   @glitch_script "/js/glitch.js"
+  @toc_script "/js/toc.js"
+  @progress_script "/js/progress.js"
+  @copy_code_script "/js/copy-code.js"
+  @back_to_top_script "/js/back-to-top.js"
 
   # Fonts
   @font_preconnect ["https://fonts.googleapis.com", "https://fonts.gstatic.com"]
@@ -34,6 +38,10 @@ defmodule Dieman.Settings do
   def words_per_minute, do: @words_per_minute
   def stylesheet, do: @stylesheet
   def glitch_script, do: @glitch_script
+  def toc_script, do: @toc_script
+  def progress_script, do: @progress_script
+  def copy_code_script, do: @copy_code_script
+  def back_to_top_script, do: @back_to_top_script
   def font_preconnect, do: @font_preconnect
   def font_stylesheet, do: @font_stylesheet
   def icon(name), do: @icons[name]

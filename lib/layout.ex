@@ -89,6 +89,13 @@ defmodule Dieman.RootLayout do
           Dieman.live_reload(assigns)
 
           script(src: Settings.glitch_script())
+
+          if body_class == "page-article" do
+            script(src: Settings.toc_script())
+            script(src: Settings.progress_script())
+            script(src: Settings.copy_code_script())
+            script(src: Settings.back_to_top_script())
+          end
         end
       end
     end
