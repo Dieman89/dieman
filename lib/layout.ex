@@ -95,6 +95,7 @@ defmodule Dieman.RootLayout do
             script(src: Settings.progress_script())
             script(src: Settings.copy_code_script())
             script(src: Settings.back_to_top_script())
+            script(src: Settings.like_heart_script())
           end
         end
       end

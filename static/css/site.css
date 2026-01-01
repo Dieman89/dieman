@@ -41,6 +41,11 @@
   --text-3xl: 2rem;
 }
 
+::selection {
+  background: var(--orange);
+  color: var(--bg);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -638,8 +643,8 @@ article code {
 }
 
 article pre {
-  padding: 1rem;
-  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
   overflow-x: auto;
   margin: 1rem 0;
   background: #403838 !important;
@@ -648,6 +653,217 @@ article pre {
 article pre code {
   background: none;
   padding: 0;
+  padding-top: 1rem;
+  display: block;
+}
+
+article pre code::before {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.75rem;
+  font-size: 0.55rem;
+  color: var(--fg-muted);
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  opacity: 0.5;
+}
+
+article pre code.language-go::before { content: "go"; }
+article pre code.language-scala::before { content: "scala"; }
+article pre code.language-javascript::before { content: "js"; }
+article pre code.language-typescript::before { content: "ts"; }
+article pre code.language-python::before { content: "python"; }
+article pre code.language-rust::before { content: "rust"; }
+article pre code.language-elixir::before { content: "elixir"; }
+article pre code.language-bash::before { content: "bash"; }
+article pre code.language-shell::before { content: "shell"; }
+article pre code.language-json::before { content: "json"; }
+article pre code.language-yaml::before { content: "yaml"; }
+article pre code.language-html::before { content: "html"; }
+article pre code.language-css::before { content: "css"; }
+article pre code.language-sql::before { content: "sql"; }
+article pre code.language-java::before { content: "java"; }
+article pre code.language-ruby::before { content: "ruby"; }
+article pre code.language-c::before { content: "c"; }
+article pre code.language-cpp::before { content: "c++"; }
+article pre code.language-markdown::before { content: "md"; }
+
+article pre code .line {
+  transition: background 0.15s ease;
+}
+
+article pre code .line:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+article pre code .line::before {
+  content: attr(data-line);
+  display: inline-block;
+  width: 2rem;
+  margin-right: 1.25rem;
+  text-align: right;
+  color: var(--fg-muted);
+  opacity: 0.3;
+  font-size: 0.75em;
+  user-select: none;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+article pre code .line:hover::before {
+  opacity: 0.7;
+  color: var(--orange);
+}
+
+article pre code ::selection {
+  background: rgba(255, 255, 255, 0.2);
+  color: inherit;
+}
+
+.like-heart {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: min(calc(2rem + 220px + 2rem + 700px + 0.75rem + 2px), calc(100vw - 3rem));
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 100;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+}
+
+.like-heart:hover {
+  opacity: 1;
+}
+
+.like-heart:hover svg {
+  transform: scale(1.1);
+}
+
+.like-heart svg {
+  transition: transform 0.2s ease;
+}
+
+.like-heart.pulse {
+  animation: heartPulse 0.3s ease;
+}
+
+.like-heart svg {
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(2px 3px 3px rgba(0, 0, 0, 0.4));
+}
+
+.like-heart .heart-bg {
+  fill: var(--bg-1);
+  stroke: var(--red);
+  stroke-width: 1;
+  opacity: 0.6;
+}
+
+.like-heart .heart-fill {
+  fill: url(#heart-gradient);
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.3s ease;
+}
+
+.like-heart[data-filled="true"] .heart-fill {
+  clip-path: inset(0 0 0 0);
+  fill: var(--red);
+}
+
+.like-heart[data-filled="true"] .heart-bg {
+  opacity: 0;
+}
+
+.heart-count {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0.25rem;
+  font-size: 0.65rem;
+  color: var(--fg-muted);
+  opacity: 0.6;
+}
+
+.heart-count.pop {
+  animation: countPop 0.4s ease-out;
+}
+
+@keyframes countPop {
+  0% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.4); }
+  100% { transform: translateX(-50%) scale(1); }
+}
+
+@keyframes heartPulse {
+  0%, 100% { transform: translateY(-50%) scale(1); }
+  50% { transform: translateY(-50%) scale(1.3); }
+}
+
+.like-heart.complete svg {
+  animation: heartComplete 0.8s ease-out;
+}
+
+@keyframes heartComplete {
+  0% { transform: scale(1); }
+  15% { transform: scale(1.35); }
+  30% { transform: scale(0.9); }
+  45% { transform: scale(1.2); }
+  60% { transform: scale(0.95); }
+  75% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  animation: particleBurst 1.4s ease-out forwards;
+}
+
+.particle-circle {
+  width: 8px;
+  height: 8px;
+  background: var(--color);
+  border-radius: 50%;
+}
+
+.particle-square {
+  width: 6px;
+  height: 6px;
+  border: 1.5px solid var(--color);
+}
+
+.particle-triangle {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 7px solid var(--color);
+}
+
+@keyframes particleBurst {
+  0% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) translateX(0) translateY(0) scale(0.3);
+  }
+  40% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) translateX(var(--x)) translateY(var(--y)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateX(var(--x)) translateY(var(--y)) scale(0.5);
+  }
 }
 
 /* Copy code button */

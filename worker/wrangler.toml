@@ -1,0 +1,7 @@
+name = "heart-counter"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[[kv_namespaces]]
+binding = "HEART_COUNTS"
+id = "dfae1bc83c844cac8541f1488cd435b6"
