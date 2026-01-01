@@ -23,11 +23,11 @@ defmodule Dieman.OgImage do
   @purple {0xA8, 0xA9, 0xEB}
 
   @title_font "JetBrains Mono Bold"
-  @title_size 52
+  @title_size 58
   @site_font "JetBrains Mono"
-  @site_size 20
+  @site_size 26
   @tag_font "JetBrains Mono Medium"
-  @tag_size 14
+  @tag_size 18
 
   @heart_api "https://heart-counter.a-buonerba.workers.dev/api/hearts"
 
@@ -51,7 +51,9 @@ defmodule Dieman.OgImage do
 
   @doc "Fetch heart count from Cloudflare Worker API."
   def fetch_heart_count(permalink) do
-    url = "#{@heart_api}#{permalink}"
+    # Ensure trailing slash to match website's path format
+    normalized = if String.ends_with?(permalink, "/"), do: permalink, else: permalink <> "/"
+    url = "#{@heart_api}#{normalized}"
 
     case :httpc.request(:get, {String.to_charlist(url), []}, [{:timeout, 5000}], []) do
       {:ok, {{_, 200, _}, _, body}} ->

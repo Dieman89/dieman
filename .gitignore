@@ -10,3 +10,4 @@ dieman-*.tar
 /tmp/
 /.elixir_ls/
 /site/
+/static/og/
