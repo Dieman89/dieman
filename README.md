@@ -9,8 +9,9 @@
 ---
 
 ```bash
-mix deps.get && mix start         # visit localhost:4999
-MIX_ENV=prod mix build            # build to site/
-CV_PASSWORD="password" mix start  # protected cv
-mix dieman.gen.post "Title"       # new post
+mix deps.get && mix start       # dev server at localhost:4999
+mix build                       # build to site/ (CV auto-protected)
+mix dieman.gen.post "Title"     # new post
 ```
+
+CV is protected by Cloudflare Turnstile CAPTCHA + content-hashed URL.
