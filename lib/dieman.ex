@@ -29,4 +29,15 @@ defmodule Dieman do
       ""
     end
   end
+
+  @doc "Render analytics script in prod mode only."
+  def analytics do
+    if Mix.env() == :prod do
+      Phoenix.HTML.raw("""
+      <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "0e0791e666b34293881978c9a293a731"}'></script>
+      """)
+    else
+      ""
+    end
+  end
 end
