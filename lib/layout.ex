@@ -109,6 +109,8 @@ defmodule Dieman.RootLayout do
             script(src: Settings.back_to_top_script())
             script(src: Settings.like_heart_script())
           end
+
+          Dieman.analytics()
         end
       end
     end
