@@ -35,6 +35,7 @@ defmodule Dieman do
     if Mix.env() == :prod do
       Phoenix.HTML.raw("""
       <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "0e0791e666b34293881978c9a293a731"}'></script>
+      <script defer src="https://cloud.umami.is/script.js" data-website-id="dca32d18-c12d-42a9-ba84-1751e2615c81"></script>
       """)
     else
       ""
