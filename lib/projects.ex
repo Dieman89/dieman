@@ -9,13 +9,20 @@ defmodule Dieman.Pages.Projects do
   import Temple
   alias Dieman.{Data, Settings}
 
+  defp thumbnail(path) do
+    path
+    |> Path.dirname()
+    |> Path.join("thumbnails")
+    |> Path.join(Path.basename(path))
+  end
+
   def template(_assigns) do
     temple do
       div class: "projects-list" do
         for project <- Data.projects() do
           article class: "project-card" do
             a href: project.image, target: "_blank", class: "project-image" do
-              img(src: project.image, alt: project.title)
+              img(src: thumbnail(project.image), alt: project.title, loading: "lazy")
             end
 
             div class: "project-content" do

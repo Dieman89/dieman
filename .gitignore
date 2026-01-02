@@ -11,3 +11,4 @@ dieman-*.tar
 /.elixir_ls/
 /site/
 /static/og/
+/static/images/projects/thumbnails/

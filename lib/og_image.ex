@@ -30,6 +30,46 @@ defmodule Dieman.OgImage do
   @tag_size 18
 
   @heart_api "https://heart-counter.a-buonerba.workers.dev/api/hearts"
+  @posts_dir "content/posts"
+  @og_dir "static/og"
+
+  @doc "Generate OG images for all posts."
+  def generate_all do
+    File.mkdir_p!(@og_dir)
+
+    @posts_dir
+    |> File.ls!()
+    |> Enum.filter(&String.ends_with?(&1, ".md"))
+    |> Enum.each(&generate_for_post/1)
+  end
+
+  defp generate_for_post(filename) do
+    path = Path.join(@posts_dir, filename)
+
+    with {:ok, content} <- File.read(path),
+         {:ok, frontmatter} <- parse_frontmatter(content) do
+      title = frontmatter["title"] || "Untitled"
+      tags = frontmatter["tags"] || []
+      slug = Slug.slugify(title, separator: "-")
+      output = Path.join(@og_dir, "#{slug}.png")
+
+      Mix.shell().info("OG: #{slug}")
+
+      case generate(title, "/posts/#{slug}", output, tags: tags) do
+        :ok -> :ok
+        {:error, reason} -> Mix.shell().error("OG failed: #{inspect(reason)}")
+      end
+    else
+      _ -> Mix.shell().error("Parse failed: #{filename}")
+    end
+  end
+
+  defp parse_frontmatter(content) do
+    case String.split(content, ~r/^---\s*$/m, parts: 3) do
+      ["", yaml, _body] -> YamlElixir.read_from_string(yaml)
+      _ -> {:error, :invalid_frontmatter}
+    end
+  end
 
   @doc "Generate OG image for a post and save to output path."
   def generate(title, permalink, output_path, opts \\ []) do
