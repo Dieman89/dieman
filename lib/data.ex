@@ -4,7 +4,7 @@ defmodule Dieman.Data do
   # Site
   @site_title "dieman.dev"
   @name "Alessandro Buonerba"
-  @avatar "/images/avatar.jpeg"
+  @avatar "/images/avatar.png"
 
   # Profile
   @taglines [

@@ -125,7 +125,7 @@ defmodule Dieman.OgImage do
     solid_color(@width, @height, @bg)
   end
 
-  @avatar_path "static/images/avatar.jpeg"
+  @avatar_path "static/images/avatar.png"
   @avatar_size 120
   @avatar_border 3
   @padding 60
