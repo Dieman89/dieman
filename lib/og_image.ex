@@ -366,8 +366,7 @@ defmodule Dieman.OgImage do
 
   defp add_heart_count(img, count) do
     heart_text = "♥ #{count}"
-    # Position at bottom right, aligned with tags
-    add_text(img, heart_text, @width - 120, @bottom_y - 10, @site_font, @site_size, @red)
+    add_text(img, heart_text, @width - 140, @bottom_y - 20, @title_font, 36, @red)
   end
 
   defp add_accent_line(img) do
