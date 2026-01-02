@@ -16,6 +16,7 @@ defmodule Dieman.Settings do
   @copy_code_script "/js/copy-code.js"
   @back_to_top_script "/js/back-to-top.js"
   @like_heart_script "/js/like-heart.js"
+  @search_script "/js/search.js"
 
   # Fonts
   @font_preconnect ["https://fonts.googleapis.com", "https://fonts.gstatic.com"]
@@ -23,7 +24,7 @@ defmodule Dieman.Settings do
 
   # Icons
   @svg_dir Path.expand("../static/svg", __DIR__)
-  @icon_names ~w(github linkedin rss calendar discord)a
+  @icon_names ~w(github linkedin rss calendar discord search)a
 
   for name <- @icon_names do
     @external_resource Path.join(@svg_dir, "#{name}.svg")
@@ -44,6 +45,7 @@ defmodule Dieman.Settings do
   def copy_code_script, do: @copy_code_script
   def back_to_top_script, do: @back_to_top_script
   def like_heart_script, do: @like_heart_script
+  def search_script, do: @search_script
   def font_preconnect, do: @font_preconnect
   def font_stylesheet, do: @font_stylesheet
   def icon(name), do: @icons[name]

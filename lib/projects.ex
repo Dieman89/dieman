@@ -10,10 +10,14 @@ defmodule Dieman.Pages.Projects do
   alias Dieman.{Data, Settings}
 
   defp thumbnail(path) do
-    path
-    |> Path.dirname()
-    |> Path.join("thumbnails")
-    |> Path.join(Path.basename(path))
+    thumb =
+      path
+      |> Path.dirname()
+      |> Path.join("thumbnails")
+      |> Path.join(Path.basename(path))
+
+    # Fallback to original if thumbnail doesn't exist (local dev)
+    if File.exists?("static" <> thumb), do: thumb, else: path
   end
 
   def template(_assigns) do

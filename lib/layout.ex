@@ -96,6 +96,7 @@ defmodule Dieman.RootLayout do
         body class: body_class do
           render(@inner_content)
 
+          Components.search_modal()
           Components.footer()
 
           Dieman.live_reload(assigns)
@@ -111,6 +112,9 @@ defmodule Dieman.RootLayout do
           end
 
           Dieman.analytics()
+
+          script(defer: true, src: "https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js")
+          script(src: Settings.search_script())
         end
       end
     end

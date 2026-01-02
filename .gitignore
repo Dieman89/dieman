@@ -12,3 +12,4 @@ dieman-*.tar
 /site/
 /static/og/
 /static/images/projects/thumbnails/
+/static/search-index.json

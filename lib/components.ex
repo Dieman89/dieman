@@ -147,7 +147,11 @@ defmodule Dieman.Components do
           end
         end
 
-        div(class: "nav-bottom social-links", do: social_links())
+        div class: "nav-bottom" do
+          div(class: "social-links", do: social_links())
+
+          p(class: "search-hint", do: "⌘K to search")
+        end
       end
     end
   end
@@ -185,4 +189,33 @@ defmodule Dieman.Components do
   end
 
   def tags(_), do: ""
+
+  # Search Modal
+
+  def search_modal do
+    temple do
+      div id: "search-overlay", class: "search-overlay" do
+        div class: "search-modal" do
+          div class: "search-input-wrapper" do
+            span(class: "search-icon", do: icon(:search))
+
+            input(
+              type: "search",
+              id: "search-input",
+              class: "search-input",
+              placeholder: "Search posts and projects...",
+              autocomplete: "off",
+              aria_label: "Search"
+            )
+
+            span class: "search-esc" do
+              "esc"
+            end
+          end
+
+          div(id: "search-results", class: "search-results", role: "listbox")
+        end
+      end
+    end
+  end
 end

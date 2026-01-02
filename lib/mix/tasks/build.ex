@@ -8,6 +8,8 @@ defmodule Mix.Tasks.Dieman.Build do
     :inets.start()
     :ssl.start()
 
+    Dieman.SearchIndex.generate()
+
     if Mix.env() == :prod do
       Dieman.OgImage.generate_all()
       Dieman.Thumbnails.generate_all()
