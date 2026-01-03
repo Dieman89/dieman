@@ -6,10 +6,10 @@ defmodule Dieman.Pages.Posts do
     title: "Posts",
     permalink: "/posts"
 
-  use Dieman.Components
+  use Dieman.UI.Components
 
-  alias Dieman.Data
-  alias Dieman.Settings
+  alias Dieman.Assets
+  alias Dieman.Content
 
   def template(assigns) do
     temple do
@@ -19,7 +19,7 @@ defmodule Dieman.Pages.Posts do
         for post <- @posts do
           article class: "post-item" do
             div class: "post-meta" do
-              time(do: Calendar.strftime(post.date, Settings.date_format()))
+              time(do: Calendar.strftime(post.date, Assets.date_format()))
               tags(post[:tags] || [])
             end
 
@@ -29,7 +29,7 @@ defmodule Dieman.Pages.Posts do
       end
 
       if Enum.empty?(@posts) do
-        p(class: "empty", do: Data.no_posts())
+        p(class: "empty", do: Content.no_posts())
       end
     end
   end

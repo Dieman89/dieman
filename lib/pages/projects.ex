@@ -7,7 +7,7 @@ defmodule Dieman.Pages.Projects do
     permalink: "/projects"
 
   import Temple
-  alias Dieman.{Data, Settings}
+  alias Dieman.{Assets, Content}
 
   defp thumbnail(path) do
     thumb =
@@ -23,7 +23,7 @@ defmodule Dieman.Pages.Projects do
   def template(_assigns) do
     temple do
       div class: "projects-list" do
-        for project <- Data.projects() do
+        for project <- Content.projects() do
           article class: "project-card" do
             a href: project.image, target: "_blank", class: "project-image" do
               img(src: thumbnail(project.image), alt: project.title, loading: "lazy")
@@ -50,11 +50,11 @@ defmodule Dieman.Pages.Projects do
 
               div class: "project-meta" do
                 time class: "project-date" do
-                  Calendar.strftime(project.date, Settings.date_format())
+                  Calendar.strftime(project.date, Assets.date_format())
                 end
 
                 a href: project.repo, class: "project-repo", target: "_blank" do
-                  Phoenix.HTML.raw(Settings.icon(:github))
+                  Phoenix.HTML.raw(Assets.icon(:github))
                   span(do: "View on GitHub")
                 end
               end

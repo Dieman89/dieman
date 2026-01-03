@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Dieman.Gen.Post do
   use Mix.Task
 
-  alias Dieman.Settings
+  alias Dieman.Assets
 
   @shortdoc "Generate a new post"
   @moduledoc @shortdoc
@@ -14,7 +14,7 @@ defmodule Mix.Tasks.Dieman.Gen.Post do
 
     post_title = Enum.join(argv, " ")
     post_date = Date.utc_today()
-    post_time = Settings.default_post_time()
+    post_time = Assets.default_post_time()
 
     file_name =
       post_title

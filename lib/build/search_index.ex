@@ -4,7 +4,7 @@ defmodule Dieman.SearchIndex do
   @posts_dir "content/posts"
   @output_path "static/search-index.json"
 
-  alias Dieman.Data
+  alias Dieman.Content
 
   def generate do
     posts = index_posts()
@@ -55,7 +55,7 @@ defmodule Dieman.SearchIndex do
   end
 
   defp index_projects do
-    Data.projects()
+    Content.projects()
     |> Enum.with_index()
     |> Enum.map(fn {project, _idx} ->
       slug = project.title |> String.downcase() |> String.replace(~r/[^a-z0-9]+/, "-")

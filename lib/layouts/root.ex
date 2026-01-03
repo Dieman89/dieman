@@ -3,18 +3,51 @@ defmodule Dieman.RootLayout do
 
   use Tableau.Layout
   import Temple
-  alias Dieman.Components
-  alias Dieman.Data
-  alias Dieman.Settings
+  import Dieman.UI.Shell, only: [site_footer: 0]
+  import Dieman.UI.Search
+  alias Dieman.Assets
+  alias Dieman.Content
 
   defp build_title(assigns) do
-    [assigns[:page][:title], Data.site_title()]
+    [assigns[:page][:title], Content.site_title()]
     |> Enum.reject(&is_nil/1)
     |> Enum.join(" | ")
   end
 
   defp og_type(assigns) do
     if assigns[:page][:date], do: "article", else: "website"
+  end
+
+  defp image_lightbox do
+    temple do
+      div id: "image-lightbox", class: "image-lightbox", onclick: "closeImageLightbox()" do
+        button class: "image-lightbox-close", onclick: "closeImageLightbox()" do
+          "×"
+        end
+
+        img(id: "lightbox-img", src: "", alt: "")
+      end
+
+      script do
+        """
+        function openImageLightbox(src) {
+          const lightbox = document.getElementById('image-lightbox');
+          const img = document.getElementById('lightbox-img');
+          img.src = src;
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+        function closeImageLightbox() {
+          const lightbox = document.getElementById('image-lightbox');
+          lightbox.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') closeImageLightbox();
+        });
+        """
+      end
+    end
   end
 
   defp page_class(assigns) do
@@ -32,18 +65,17 @@ defmodule Dieman.RootLayout do
   defp og_image(assigns) do
     permalink = assigns[:page][:permalink] || "/"
 
-    # For posts, check if OG image exists
     if assigns[:page][:date] && String.starts_with?(permalink, "/posts/") do
       slug = String.trim_leading(permalink, "/posts/")
       Dieman.absolute_url("/og/#{slug}.png")
     else
-      Dieman.absolute_url(Data.avatar())
+      Dieman.absolute_url(Content.avatar())
     end
   end
 
   def template(assigns) do
     page_title = build_title(assigns)
-    description = assigns[:page][:description] || "#{Data.name()} - #{hd(Data.taglines())}"
+    description = assigns[:page][:description] || "#{Content.name()} - #{hd(Content.taglines())}"
     url = Dieman.absolute_url(assigns[:page][:permalink] || "/")
     image = og_image(assigns)
     body_class = page_class(assigns)
@@ -57,7 +89,7 @@ defmodule Dieman.RootLayout do
           meta(name: "viewport", content: "width=device-width, initial-scale=1.0")
           meta(name: "color-scheme", content: "dark")
           meta(name: "description", content: description)
-          meta(name: "author", content: Data.name())
+          meta(name: "author", content: Content.name())
 
           title(do: page_title)
 
@@ -67,7 +99,7 @@ defmodule Dieman.RootLayout do
           meta(property: "og:description", content: description)
           meta(property: "og:url", content: url)
           meta(property: "og:image", content: image)
-          meta(property: "og:site_name", content: Data.site_title())
+          meta(property: "og:site_name", content: Content.site_title())
 
           # Twitter Card
           meta(name: "twitter:card", content: "summary_large_image")
@@ -79,92 +111,48 @@ defmodule Dieman.RootLayout do
           link(
             rel: "alternate",
             type: "application/rss+xml",
-            title: "#{Data.site_title()} RSS",
+            title: "#{Content.site_title()} RSS",
             href: "/feed.xml"
           )
 
           # Fonts
-          for url <- Settings.font_preconnect() do
+          for url <- Assets.font_preconnect() do
             link(rel: "preconnect", href: url, crossorigin: url =~ "gstatic")
           end
 
-          link(rel: "stylesheet", href: Settings.font_stylesheet())
+          link(rel: "stylesheet", href: Assets.font_stylesheet())
 
           # Styles & Favicon
-          link(rel: "stylesheet", href: Settings.stylesheet())
-          link(rel: "icon", type: "image/jpeg", href: Data.avatar())
+          link(rel: "stylesheet", href: Assets.stylesheet())
+          link(rel: "icon", type: "image/jpeg", href: Content.avatar())
         end
 
         body class: body_class do
           render(@inner_content)
 
-          Components.search_modal()
-          Components.footer()
+          search_modal()
+          image_lightbox()
+          site_footer()
 
           Dieman.live_reload(assigns)
 
-          script(src: Settings.glitch_script())
+          script(src: Assets.glitch_script())
 
           if body_class == "page-article" do
-            script(src: Settings.toc_script())
-            script(src: Settings.progress_script())
-            script(src: Settings.copy_code_script())
-            script(src: Settings.back_to_top_script())
-            script(src: Settings.like_heart_script())
+            script(src: Assets.toc_script())
+            script(src: Assets.progress_script())
+            script(src: Assets.copy_code_script())
+            script(src: Assets.back_to_top_script())
+            script(src: Assets.like_heart_script())
           end
 
           Dieman.analytics()
 
           script(defer: true, src: "https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js")
-          script(src: Settings.search_script())
+          script(src: Assets.search_script())
         end
       end
     end
     |> Phoenix.HTML.Safe.to_iodata()
-  end
-end
-
-defmodule Dieman.PostLayout do
-  @moduledoc "Layout for posts and pages with sidebar navigation."
-
-  use Tableau.Layout, layout: Dieman.RootLayout
-  import Temple
-  alias Dieman.Components
-  alias Dieman.Settings
-
-  def template(assigns) do
-    current_path = assigns[:page][:permalink] || "/"
-
-    temple do
-      div class: "single" do
-        Components.sidebar(current_path)
-
-        article do
-          header do
-            if assigns[:page][:date] do
-              div class: "post-header-meta" do
-                div class: "post-header-left" do
-                  span class: "date" do
-                    Calendar.strftime(@page.date, Settings.date_format())
-                  end
-
-                  Components.tags(@page[:tags] || [])
-                end
-
-                if assigns[:page][:body] do
-                  Components.reading_time(@page.body)
-                end
-              end
-            end
-
-            h1(do: @page.title)
-          end
-
-          Phoenix.HTML.raw(render(@inner_content))
-        end
-
-        Components.post_shapes()
-      end
-    end
   end
 end

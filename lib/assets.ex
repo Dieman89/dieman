@@ -1,5 +1,5 @@
-defmodule Dieman.Settings do
-  @moduledoc "Site settings and configuration values."
+defmodule Dieman.Assets do
+  @moduledoc "Asset paths, icons, and formatting settings."
 
   # Date/Time
   @date_format "%b %d, %Y"

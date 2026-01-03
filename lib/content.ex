@@ -1,5 +1,5 @@
-defmodule Dieman.Data do
-  @moduledoc "Site configuration and content data."
+defmodule Dieman.Content do
+  @moduledoc "Site content: identity, links, and projects."
 
   # Site
   @site_title "dieman.dev"

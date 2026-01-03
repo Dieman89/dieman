@@ -5,9 +5,9 @@ defmodule Dieman.Pages.Home do
     layout: Dieman.RootLayout,
     permalink: "/"
 
-  use Dieman.Components
+  use Dieman.UI.Components
 
-  alias Dieman.Data
+  alias Dieman.Content
 
   def template(_assigns) do
     temple do
@@ -16,7 +16,7 @@ defmodule Dieman.Pages.Home do
           avatar()
 
           h1 do
-            glitch_text(Data.name())
+            glitch_text(Content.name())
           end
 
           p class: "title" do

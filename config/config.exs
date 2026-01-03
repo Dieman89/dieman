@@ -10,6 +10,7 @@ config :tableau, :reloader,
 config :web_dev_utils, :reload_log, true
 
 config :tableau, :config,
+  converters: [md: Dieman.Markdown.Converter],
   url: "https://dieman.dev",
   timezone: "America/Mexico_City",
   include_dir: "static",

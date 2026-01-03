@@ -1,7 +1,7 @@
 defmodule Dieman do
   @moduledoc "Core utilities for dieman.dev."
 
-  alias Dieman.Settings
+  alias Dieman.Assets
 
   @doc "Generate an absolute URL from a relative path."
   def absolute_url(path) do
@@ -16,7 +16,7 @@ defmodule Dieman do
   @doc "Calculate reading time in minutes from content string."
   def reading_time(content) when is_binary(content) do
     words = content |> String.split(~r/\s+/) |> length()
-    max(1, ceil(words / Settings.words_per_minute()))
+    max(1, ceil(words / Assets.words_per_minute()))
   end
 
   def reading_time(_), do: 1

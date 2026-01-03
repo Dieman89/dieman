@@ -77,11 +77,13 @@ The `parTraverse` function applies an effectful operation to each element in par
 
 Running both on CI revealed the velocity gap:
 
+::compare
 | Implementation | Build + Run Time |
 |----------------|------------------|
 | Go             | 5 seconds        |
 | Scala          | 51 seconds       |
 | Scala (cached) | 39 seconds       |
+::
 
 Go is **10x faster**. Zero dependencies means no download time, no resolution, no compilation of external libraries. It just builds and runs.
 

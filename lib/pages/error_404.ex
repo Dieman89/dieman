@@ -6,7 +6,7 @@ defmodule Dieman.Pages.Error404 do
     permalink: "/404",
     title: "404"
 
-  use Dieman.Components
+  use Dieman.UI.Components
 
   def template(_assigns) do
     temple do
