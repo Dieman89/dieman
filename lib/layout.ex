@@ -160,6 +160,8 @@ defmodule Dieman.PostLayout do
 
           Phoenix.HTML.raw(render(@inner_content))
         end
+
+        Components.post_shapes()
       end
     end
   end

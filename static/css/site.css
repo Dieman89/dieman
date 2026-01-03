@@ -164,7 +164,7 @@ div.home > .social-links {
 .made-with {
   position: fixed;
   top: 2rem;
-  right: max(2rem, calc(50vw - 480px)); /* Align with content area on wide screens */
+  right: 2rem;
   font-size: 0.7rem;
   color: var(--fg-muted);
   z-index: 100;
@@ -726,7 +726,7 @@ div.single article header h1 {
   color: var(--fg-muted);
 }
 
-@media (min-width: 1300px) {
+@media (min-width: 1250px) {
   .toc {
     display: block;
     position: fixed;
@@ -791,6 +791,113 @@ div.single article header h1 {
 
 .toc-link.active {
   color: var(--orange);
+}
+
+/* Post page decorative shapes - only on very wide screens */
+.post-shapes {
+  display: none;
+}
+
+@media (min-width: 1400px) {
+  .post-shapes {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 220px;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .post-shapes .shape {
+    position: absolute;
+    opacity: 0.12;
+    cursor: default;
+    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .post-shapes .shape:hover {
+    opacity: 0.4;
+    transform: scale(1.2);
+  }
+
+  .post-shapes .shape-4:hover,
+  .post-shapes .shape-7:hover {
+    transform: scale(1.2) rotate(45deg);
+  }
+
+  /* Large square - top (below "made with" text) */
+  .post-shapes .shape-1 {
+    width: 55px;
+    height: 55px;
+    border: 1.5px solid var(--red);
+    top: 12%;
+    right: 80px;
+    box-shadow: 0 0 15px rgba(249, 38, 114, 0.25);
+  }
+
+  /* Small circle */
+  .post-shapes .shape-2 {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--fg-muted);
+    border-radius: 50%;
+    top: 22%;
+    right: 40px;
+  }
+
+  /* Medium circle - blue */
+  .post-shapes .shape-3 {
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid var(--blue);
+    border-radius: 50%;
+    top: 35%;
+    right: 120px;
+    box-shadow: 0 0 15px rgba(102, 217, 239, 0.25);
+  }
+
+  /* Diamond - green */
+  .post-shapes .shape-4 {
+    width: 30px;
+    height: 30px;
+    border: 1.5px solid var(--green);
+    top: 50%;
+    right: 60px;
+    transform: rotate(45deg);
+    box-shadow: 0 0 15px rgba(166, 226, 46, 0.25);
+  }
+
+  /* Small square */
+  .post-shapes .shape-5 {
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--fg-muted);
+    top: 62%;
+    right: 150px;
+  }
+
+  /* Circle - yellow */
+  .post-shapes .shape-6 {
+    width: 35px;
+    height: 35px;
+    border: 1.5px solid var(--yellow);
+    border-radius: 50%;
+    top: 75%;
+    right: 90px;
+    box-shadow: 0 0 15px rgba(230, 219, 116, 0.25);
+  }
+
+  /* Small diamond - bottom */
+  .post-shapes .shape-7 {
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--purple);
+    top: 88%;
+    right: 45px;
+    transform: rotate(45deg);
+    box-shadow: 0 0 12px rgba(174, 129, 255, 0.2);
+  }
 }
 
 /* Article content styling */

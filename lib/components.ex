@@ -69,6 +69,7 @@ defmodule Dieman.Components do
   end
 
   # Floating decorations
+  # Shape counts: homepage uses 5, post pages use 7
 
   def floating_shapes do
     temple do
@@ -90,6 +91,14 @@ defmodule Dieman.Components do
             span(do: sym)
           end
         end
+      end
+    end
+  end
+
+  def post_shapes do
+    temple do
+      div class: "post-shapes" do
+        for i <- 1..7, do: div(class: "shape shape-#{i}")
       end
     end
   end
