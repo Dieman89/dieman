@@ -83,6 +83,13 @@ defmodule Dieman.Content do
   def site_title, do: @site_title
   def name, do: @name
   def avatar, do: @avatar
+
+  @syntax_theme Application.compile_env(:tableau, :config)[:markdown][:mdex][:syntax_highlight][
+                  :formatter
+                ]
+                |> elem(1)
+                |> Keyword.get(:theme)
+  def syntax_theme, do: @syntax_theme
   def taglines, do: @taglines
   def locations, do: @locations
   def no_posts, do: @no_posts

@@ -5,7 +5,7 @@ tags:
   - tech
 ---
 
-This post tests all the custom markdown components available in this blog.
+This post tests all the custom markdown components available in this blog :fire:.
 
 ## Keyboard Shortcuts
 
@@ -42,6 +42,54 @@ More examples with different images:
 ::figure{/images/projects/systems.png|Systems Architecture|A diagram showing the system architecture}
 
 ::figure{/images/site.png|Site Preview|Preview of the website}
+
+## Code Block
+
+```go
+type Config struct {
+    BaseURL     string
+    PublicPath  []string
+    PrivatePath []string
+}
+
+var wg sync.WaitGroup
+wg.Add(len(config.PublicPath))
+
+for _, path := range config.PublicPath {
+    go func(p string) {
+        defer wg.Done()
+        checkEndpoint(p, true)
+    }(path)
+}
+
+wg.Wait()
+```
+
+:smile:
+
+## Code Tabs
+
+Show the same example in multiple languages with a tabbed interface:
+
+::tabs
+```go[Go]
+func hello() {
+    fmt.Println("Hello, World!")
+}
+```
+
+```scala[Scala]
+def hello(): Unit = {
+    println("Hello, World!")
+}
+```
+
+```elixir[Elixir]
+def hello do
+  IO.puts("Hello, World!")
+end
+```
+::
 
 ## File Trees
 

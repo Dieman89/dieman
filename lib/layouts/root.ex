@@ -142,6 +142,8 @@ defmodule Dieman.RootLayout do
             script(src: Assets.toc_script())
             script(src: Assets.progress_script())
             script(src: Assets.copy_code_script())
+            script(src: Assets.code_tabs_script())
+            script(src: Assets.youtube_facade_script())
             script(src: Assets.back_to_top_script())
             script(src: Assets.like_heart_script())
           end

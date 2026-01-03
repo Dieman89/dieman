@@ -8,6 +8,7 @@ defmodule Dieman.Markdown.Converter do
   - `::youtube{id}` - YouTube embeds
   - `::figure{src|alt|caption}` - Images with captions
   - `::tree...::` - File trees
+  - `::tabs...::` - Code tabs with language switcher
   - `::compare...::` - Comparison tables
   - `::note/warning/tip...::` - Callout boxes
   - `::details[title]...::` - Collapsible sections
@@ -21,6 +22,7 @@ defmodule Dieman.Markdown.Converter do
   alias Dieman.Markdown.Components.{
     Badge,
     Callout,
+    CodeTabs,
     Comparison,
     Details,
     Diff,
@@ -39,6 +41,7 @@ defmodule Dieman.Markdown.Converter do
   def convert(_filepath, _front_matter, body, %{site: %{config: config}}) do
     body
     # Pre-markdown processing (preserves raw content)
+    |> CodeTabs.process()
     |> FileTree.process()
     |> Terminal.process()
     |> Diff.process()

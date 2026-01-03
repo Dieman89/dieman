@@ -17,10 +17,12 @@ defmodule Dieman.Assets do
   @back_to_top_script "/js/back-to-top.js"
   @like_heart_script "/js/like-heart.js"
   @search_script "/js/search.js"
+  @code_tabs_script "/js/code-tabs.js"
+  @youtube_facade_script "/js/youtube-facade.js"
 
   # Fonts
   @font_preconnect ["https://fonts.googleapis.com", "https://fonts.gstatic.com"]
-  @font_stylesheet "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
+  @font_stylesheet "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;700&display=swap"
 
   # Icons
   @svg_dir Path.expand("../static/svg", __DIR__)
@@ -46,6 +48,8 @@ defmodule Dieman.Assets do
   def back_to_top_script, do: @back_to_top_script
   def like_heart_script, do: @like_heart_script
   def search_script, do: @search_script
+  def code_tabs_script, do: @code_tabs_script
+  def youtube_facade_script, do: @youtube_facade_script
   def font_preconnect, do: @font_preconnect
   def font_stylesheet, do: @font_stylesheet
   def icon(name), do: @icons[name]
