@@ -4,7 +4,7 @@
 
   const postId = window.location.pathname;
   const sessionKey = `viewed-${postId}`;
-  const API_URL = "https://heart-counter.a-buonerba.workers.dev";
+  const API_URL = "https://post-stats.a-buonerba.workers.dev";
 
   const viewsEl = footer.querySelector(".post-views-count");
   if (!viewsEl) return;

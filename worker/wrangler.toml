@@ -1,7 +1,7 @@
-name = "heart-counter"
+name = "post-stats"
 main = "src/index.js"
 compatibility_date = "2024-01-01"
 
 [[kv_namespaces]]
-binding = "HEART_COUNTS"
+binding = "POST_STATS"
 id = "dfae1bc83c844cac8541f1488cd435b6"

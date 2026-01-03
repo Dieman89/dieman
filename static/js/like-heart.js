@@ -6,7 +6,7 @@
   const storageKey = `heart-${postId}`;
   const countedKey = `heart-counted-${postId}`;
   const maxClicks = 5;
-  const API_URL = "https://heart-counter.a-buonerba.workers.dev";
+  const API_URL = "https://post-stats.a-buonerba.workers.dev";
 
   let clicks = parseInt(localStorage.getItem(storageKey) || "0", 10);
   let totalCount = 0;

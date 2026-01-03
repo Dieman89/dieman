@@ -1,5 +1,7 @@
 const ALLOWED_ORIGINS = [
   "https://dieman.dev",
+  "http://localhost:4999",
+  "http://localhost:4000",
 ];
 
 function getCorsHeaders(origin) {
@@ -41,14 +43,14 @@ export default {
       const key = `hearts:${postId}`;
 
       if (request.method === "GET") {
-        const count = await env.HEART_COUNTS.get(key);
+        const count = await env.POST_STATS.get(key);
         return jsonResponse({ count: parseInt(count || "0", 10) }, origin);
       }
 
       if (request.method === "POST") {
-        const current = parseInt((await env.HEART_COUNTS.get(key)) || "0", 10);
+        const current = parseInt((await env.POST_STATS.get(key)) || "0", 10);
         const newCount = current + 1;
-        await env.HEART_COUNTS.put(key, newCount.toString());
+        await env.POST_STATS.put(key, newCount.toString());
         return jsonResponse({ count: newCount }, origin);
       }
 
@@ -62,14 +64,14 @@ export default {
       const key = `views:${postId}`;
 
       if (request.method === "GET") {
-        const count = await env.HEART_COUNTS.get(key);
+        const count = await env.POST_STATS.get(key);
         return jsonResponse({ count: parseInt(count || "0", 10) }, origin);
       }
 
       if (request.method === "POST") {
-        const current = parseInt((await env.HEART_COUNTS.get(key)) || "0", 10);
+        const current = parseInt((await env.POST_STATS.get(key)) || "0", 10);
         const newCount = current + 1;
-        await env.HEART_COUNTS.put(key, newCount.toString());
+        await env.POST_STATS.put(key, newCount.toString());
         return jsonResponse({ count: newCount }, origin);
       }
 

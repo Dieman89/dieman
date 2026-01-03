@@ -29,7 +29,7 @@ defmodule Dieman.OgImage do
   @tag_font "JetBrains Mono Medium"
   @tag_size 18
 
-  @heart_api "https://heart-counter.a-buonerba.workers.dev/api/hearts"
+  @heart_api "https://post-stats.a-buonerba.workers.dev/api/hearts"
   @posts_dir "content/posts"
   @og_dir "static/og"
 
