@@ -21,9 +21,10 @@ Common shortcuts:
 
 ## YouTube Embeds
 
-Embed YouTube videos with a simple shortcode:
+Embed YouTube videos with a simple shortcode. Use `[center]` for smaller or `[full]` for full width:
 
-::youtube{dQw4w9WgXcQ}
+::youtube[center]{dQw4w9WgXcQ}
+::youtube[full]{dQw4w9WgXcQ}
 
 ## Images with Captions
 
@@ -35,13 +36,26 @@ You can also use it without a caption:
 
 ::figure{/images/avatar.png|Just an avatar}
 
-More examples with different images:
+### Alignment Options
 
-::figure{/images/projects/zen-monokai-ristretto.png|VS Code Theme|Zen Monokai Ristretto - a dark theme for VS Code}
+Control image alignment with `[left]`, `[center]`, or `[full]`:
 
-::figure{/images/projects/systems.png|Systems Architecture|A diagram showing the system architecture}
+::figure[left]{/images/avatar.png|Left aligned|This image is left-aligned}
 
-::figure{/images/site.png|Site Preview|Preview of the website}
+::figure[center]{/images/avatar.png|Centered|This image is centered (default)}
+
+::figure[full]{/images/projects/zen-monokai-ristretto.png|Full width|This image takes full container width}
+
+### Image Grid
+
+Display multiple images side-by-side with `::grid`. Use `::grid[60%]` to set width, and wrap with `::center` to center:
+
+::center
+::grid[60%]
+::figure{/images/avatar.png|First image}
+::figure{/images/site.png|Second image}
+::
+::
 
 ## Code Block
 
@@ -167,7 +181,7 @@ Hide content that can be expanded on click:
 ::details[Show implementation details]
 This content is hidden by default. You can put code examples, lengthy explanations, or optional information here.
 
-It supports **markdown** formatting inside too.
+It supports **markdown** formatting inside too, including badges: ::badge[Elixir]{purple} ::badge[OTP 26]{blue}
 ::
 
 ## Terminal Output
@@ -213,13 +227,44 @@ Inline labels for versions and status: ::badge[v2.0.0]{green} ::badge[deprecated
 
 You can also use plain badges: ::badge[MIT License] ::badge[TypeScript]
 
+## Stats Cards
+
+Display metrics with prominent values. Use `::grid` for full-width grid:
+
+::grid
+::stat[99.9%]{Uptime}
+::stat[1.2M]{Downloads}
+::stat[<50ms]{Response Time}
+::stat[24/7]{Support}
+::
+
+Or use inline for individual stats: ::stat[42]{Answer}
+
 ## Link Cards
 
-Rich link previews for external resources:
+Rich link previews for external resources. Use `::grid` for side-by-side:
 
+::grid
 ::link{https://github.com/elixir-lang/elixir|Elixir Programming Language}
-
 ::link{https://hexdocs.pm/phoenix/overview.html|Phoenix Framework Docs}
+::
+
+## Image Comparison
+
+Drag to compare before and after images:
+
+::compare-images{/images/projects/systems.png|/images/projects/zen-monokai-ristretto.png|Before|After}
+
+## Steps
+
+Display step-by-step instructions with numbered indicators:
+
+::steps
+Download the installer from the [official website](https://elixir-lang.org) ::badge[Required]{green}
+Run the installer and follow the prompts ::badge[5 min]{blue}
+Restart your computer when complete ::badge[Optional]{yellow}
+Verify installation by running `elixir --version` ::badge[Terminal]{purple}
+::
 
 ## Timeline
 
@@ -238,4 +283,16 @@ You can use these alongside regular markdown:
 
 > **Pro tip:** Use [[Cmd+Shift+F]] to search across all files in your project.
 
-The file tree component works great for showing project structure in tutorials!
+::tip
+Install dependencies with [[Cmd+Shift+P]] and select "Install". Requires ::badge[Node 18+]{green} or ::badge[Bun]{yellow}.
+::
+
+::note
+This feature is ::badge[beta]{yellow} and requires ::badge[v2.0.0]{green}. Press [[Cmd+K]] to enable experimental mode.
+::
+
+::details[Version compatibility]
+Supported runtimes: ::badge[Node 18+]{green} ::badge[Deno]{blue} ::badge[Bun]{yellow}
+
+Use [[Cmd+Shift+V]] to check your current version.
+::

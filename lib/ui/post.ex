@@ -14,10 +14,11 @@ defmodule Dieman.UI.Post do
   end
 
   def reading_time(content) do
+    words = content |> String.split(~r/\s+/) |> length()
     mins = Dieman.reading_time(content)
 
     temple do
-      span(class: "reading-time", do: "#{mins} min read")
+      span(class: "reading-time", data_words: "#{words} words", do: "#{mins} min read")
     end
   end
 

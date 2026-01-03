@@ -85,6 +85,24 @@
     return lastHeading;
   }
 
+  function scrollTocToActive(link) {
+    const linkIndex = Array.from(tocLinks).indexOf(link);
+
+    // If first item, scroll ToC to top to show "Contents" title
+    if (linkIndex === 0) {
+      toc.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    const tocRect = toc.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+
+    // Check if link is outside visible area of ToC
+    if (linkRect.top < tocRect.top || linkRect.bottom > tocRect.bottom) {
+      link.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+
   function updateActiveLink() {
     const activeHeading = getActiveHeading();
 
@@ -98,6 +116,7 @@
         }
         link.classList.add("active");
         lastActiveLink = link;
+        scrollTocToActive(link);
       } else {
         link.classList.remove("active");
       }

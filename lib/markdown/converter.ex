@@ -6,7 +6,7 @@ defmodule Dieman.Markdown.Converter do
 
   - `[[Key+Key]]` - Keyboard shortcuts
   - `::youtube{id}` - YouTube embeds
-  - `::figure{src|alt|caption}` - Images with captions
+  - `::figure[align]{src|alt|caption}` - Images with captions (align: left/center/full)
   - `::tree...::` - File trees
   - `::tabs...::` - Code tabs with language switcher
   - `::compare...::` - Comparison tables
@@ -18,36 +18,50 @@ defmodule Dieman.Markdown.Converter do
   - `::badge[text]{color}` - Inline badges
   - `::link{url|title}` - Link cards
   - `::timeline...::` - Chronological timeline
+  - `::compare-images{before|after|labelBefore|labelAfter}` - Image comparison slider
+  - `::stat[value]{label}` - Stats cards
+  - `::grid...::` or `::grid[n]...::` - Generic grid wrapper for any components
   """
 
   alias Dieman.Markdown.Components.{
     Badge,
     Callout,
+    Center,
     CodeTabs,
     Comparison,
     Details,
     Diff,
     Figure,
     FileTree,
+    Grid,
+    ImageCompare,
     Keyboard,
     LinkCard,
     Quote,
+    StatCard,
+    Steps,
     Terminal,
     Timeline,
     Youtube
   }
 
+  @block_components ~w(center grid steps callout note warning tip details quote timeline stats links figures compare)
+
   @doc """
   Converts markdown content to HTML with shortcode processing.
   """
-  def convert(_filepath, _front_matter, body, %{site: %{config: config}}) do
+  def convert(filepath, _front_matter, body, %{site: %{config: config}}) do
+    validate_closed_blocks(body, filepath)
+
     body
     # Pre-markdown processing (preserves raw content)
     |> CodeTabs.process()
     |> FileTree.process()
     |> Terminal.process()
     |> Diff.process()
-    |> LinkCard.process()
+    |> Grid.pre_process()
+    |> Center.pre_process()
+    |> Steps.pre_process()
     |> Comparison.pre_process()
     |> Callout.pre_process()
     |> Details.pre_process()
@@ -56,6 +70,9 @@ defmodule Dieman.Markdown.Converter do
     # Markdown to HTML
     |> MDEx.to_html!(config.markdown[:mdex])
     # Post-markdown processing
+    |> Grid.post_process()
+    |> Center.post_process()
+    |> Steps.post_process()
     |> Comparison.post_process()
     |> Callout.post_process()
     |> Details.post_process()
@@ -64,6 +81,41 @@ defmodule Dieman.Markdown.Converter do
     |> Keyboard.process()
     |> Youtube.process()
     |> Figure.process()
+    |> ImageCompare.process()
     |> Badge.process()
+    |> StatCard.process()
+    |> LinkCard.process()
+  end
+
+  defp validate_closed_blocks(body, filepath) do
+    lines = String.split(body, "\n")
+
+    Enum.reduce(lines, {[], 1}, fn line, {stack, line_num} ->
+      cond do
+        # Opening a block: ::component or ::component[...]
+        Regex.match?(~r/^::(#{Enum.join(@block_components, "|")})(\[|$|\n)/, line) ->
+          component = Regex.run(~r/^::(#{Enum.join(@block_components, "|")})/, line) |> List.last()
+          {[{component, line_num} | stack], line_num + 1}
+
+        # Closing a block: just ::
+        Regex.match?(~r/^::$/, String.trim(line)) and stack != [] ->
+          {tl(stack), line_num + 1}
+
+        true ->
+          {stack, line_num + 1}
+      end
+    end)
+    |> case do
+      {[], _} ->
+        :ok
+
+      {unclosed, _} ->
+        errors =
+          Enum.map_join(unclosed, "\n", fn {component, line} ->
+            "  - ::#{component} at line #{line}"
+          end)
+
+        raise "Unclosed block(s) in #{filepath}:\n#{errors}"
+    end
   end
 end

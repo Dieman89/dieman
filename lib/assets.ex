@@ -1,6 +1,9 @@
 defmodule Dieman.Assets do
   @moduledoc "Asset paths, icons, and formatting settings."
 
+  # Site
+  @github_username "Dieman89"
+
   # Date/Time
   @date_format "%b %d, %Y"
   @default_post_time "01:00:00 -04:00"
@@ -19,6 +22,8 @@ defmodule Dieman.Assets do
   @search_script "/js/search.js"
   @code_tabs_script "/js/code-tabs.js"
   @youtube_facade_script "/js/youtube-facade.js"
+  @image_compare_script "/js/image-compare.js"
+  @post_stats_script "/js/post-stats.js"
 
   # Fonts
   @font_preconnect ["https://fonts.googleapis.com", "https://fonts.gstatic.com"]
@@ -26,7 +31,7 @@ defmodule Dieman.Assets do
 
   # Icons
   @svg_dir Path.expand("../static/svg", __DIR__)
-  @icon_names ~w(github linkedin rss calendar discord search)a
+  @icon_names ~w(github linkedin rss calendar discord search eye pencil download home file folder user info warning lightbulb arrows_horizontal link gitlab youtube twitter file_document folder_open)a
 
   for name <- @icon_names do
     @external_resource Path.join(@svg_dir, "#{name}.svg")
@@ -37,6 +42,8 @@ defmodule Dieman.Assets do
          end)
 
   # Accessors
+  def github_username, do: @github_username
+  def github_url(repo), do: "https://github.com/#{@github_username}/#{repo}"
   def date_format, do: @date_format
   def default_post_time, do: @default_post_time
   def words_per_minute, do: @words_per_minute
@@ -50,6 +57,8 @@ defmodule Dieman.Assets do
   def search_script, do: @search_script
   def code_tabs_script, do: @code_tabs_script
   def youtube_facade_script, do: @youtube_facade_script
+  def image_compare_script, do: @image_compare_script
+  def post_stats_script, do: @post_stats_script
   def font_preconnect, do: @font_preconnect
   def font_stylesheet, do: @font_stylesheet
   def icon(name), do: @icons[name]

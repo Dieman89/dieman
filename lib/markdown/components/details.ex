@@ -2,10 +2,14 @@ defmodule Dieman.Markdown.Components.Details do
   @moduledoc """
   Processes collapsible/details blocks.
 
+  Supports markdown formatting inside, including badges.
+
   ## Example
 
       ::details[Show more]
       Hidden content here that can be expanded.
+
+      Supports **markdown** and badges: ::badge[Elixir]{purple}
       ::
   """
 
