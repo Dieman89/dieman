@@ -732,7 +732,7 @@ div.single article header h1 {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    right: 1.5rem;
+    left: calc(4rem + 920px + 50px);
     width: 180px;
     max-height: 60vh;
     overflow-y: auto;
