@@ -17,6 +17,16 @@ defmodule Mix.Tasks.Dieman.Build do
 
     Mix.Task.run("tableau.build")
     protect_cv()
+    setup_404()
+  end
+
+  defp setup_404 do
+    source = "site/404/index.html"
+
+    if File.exists?(source) do
+      File.cp!(source, "site/404.html")
+      Mix.shell().info("404 page: site/404.html")
+    end
   end
 
   defp protect_cv do
