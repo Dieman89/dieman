@@ -221,6 +221,17 @@ Rich link previews for external resources:
 
 ::link{https://hexdocs.pm/phoenix/overview.html|Phoenix Framework Docs}
 
+## Timeline
+
+Display chronological events with a vertical timeline:
+
+::timeline
+2024 | Senior Engineer | Joined the platform team ::badge[Elixir]{purple} ::badge[K8s]{blue}
+2023 | Software Engineer | Built the real-time notification system ::badge[Phoenix]{green}
+2022 | Junior Engineer | Started career ::badge[Elixir]{purple} ::badge[PostgreSQL]{blue}
+2021 | Intern | First exposure to functional programming
+::
+
 ## Combining Components
 
 You can use these alongside regular markdown:

@@ -17,6 +17,7 @@ defmodule Dieman.Markdown.Converter do
   - `::diff...::` - Diff blocks
   - `::badge[text]{color}` - Inline badges
   - `::link{url|title}` - Link cards
+  - `::timeline...::` - Chronological timeline
   """
 
   alias Dieman.Markdown.Components.{
@@ -32,6 +33,7 @@ defmodule Dieman.Markdown.Converter do
     LinkCard,
     Quote,
     Terminal,
+    Timeline,
     Youtube
   }
 
@@ -50,6 +52,7 @@ defmodule Dieman.Markdown.Converter do
     |> Callout.pre_process()
     |> Details.pre_process()
     |> Quote.pre_process()
+    |> Timeline.pre_process()
     # Markdown to HTML
     |> MDEx.to_html!(config.markdown[:mdex])
     # Post-markdown processing
@@ -57,6 +60,7 @@ defmodule Dieman.Markdown.Converter do
     |> Callout.post_process()
     |> Details.post_process()
     |> Quote.post_process()
+    |> Timeline.post_process()
     |> Keyboard.process()
     |> Youtube.process()
     |> Figure.process()
