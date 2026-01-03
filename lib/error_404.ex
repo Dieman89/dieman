@@ -4,7 +4,7 @@ defmodule Dieman.Pages.Error404 do
   use Tableau.Page,
     layout: Dieman.RootLayout,
     permalink: "/404",
-    title: "404 - Page Not Found"
+    title: "404"
 
   use Dieman.Components
 
