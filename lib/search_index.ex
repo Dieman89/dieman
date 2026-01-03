@@ -37,14 +37,9 @@ defmodule Dieman.SearchIndex do
 
     with {:ok, content} <- File.read(path),
          {:ok, frontmatter, body} <- parse_frontmatter(content) do
-      # Extract slug from filename: YYYY-MM-DD-slug.md -> slug
-      slug =
-        filename
-        |> String.replace(~r/^\d{4}-\d{2}-\d{2}-/, "")
-        |> String.replace(".md", "")
-
       title = frontmatter["title"] || "Untitled"
       tags = frontmatter["tags"] || []
+      slug = Slug.slugify(title)
 
       %{
         id: "post-#{slug}",
