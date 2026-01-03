@@ -25,7 +25,7 @@ defmodule Dieman.Pages.Projects do
       div class: "projects-list" do
         for project <- Content.projects() do
           article class: "project-card" do
-            a href: project.image, target: "_blank", class: "project-image" do
+            div class: "project-image", onclick: "openImageLightbox('#{project.image}')" do
               img(src: thumbnail(project.image), alt: project.title, loading: "lazy")
             end
 
