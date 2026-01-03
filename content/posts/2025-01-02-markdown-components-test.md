@@ -9,7 +9,8 @@ This post tests all the custom markdown components available in this blog.
 
 ## Keyboard Shortcuts
 
-You can display keyboard shortcuts inline. Press [[Cmd+K]] to open search, or use [[Ctrl+Shift+P]] for the command palette.
+You can display keyboard shortcuts inline. Press [[Cmd+K]] to open search,
+or use [[Ctrl+Shift+P]] for the command palette.
 
 Common shortcuts:
 
