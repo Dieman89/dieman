@@ -78,7 +78,8 @@ defmodule Dieman.RootLayout do
     description = assigns[:page][:description] || "#{Content.name()} - #{hd(Content.taglines())}"
     url = Dieman.absolute_url(assigns[:page][:permalink] || "/")
     image = og_image(assigns)
-    body_class = page_class(assigns)
+    marker_class = if Assets.show_title_marker?(), do: "", else: "no-marker"
+    body_class = String.trim("#{page_class(assigns)} #{marker_class}")
 
     temple do
       "<!DOCTYPE html>"
@@ -151,6 +152,7 @@ defmodule Dieman.RootLayout do
             script(type: "module", src: Assets.mermaid_script())
             script(src: Assets.gist_script())
             script(src: Assets.tweet_script())
+            script(src: Assets.share_script())
           end
 
           Dieman.analytics()

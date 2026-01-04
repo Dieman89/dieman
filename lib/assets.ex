@@ -2,7 +2,9 @@ defmodule Dieman.Assets do
   @moduledoc "Asset paths, icons, and formatting settings."
 
   # Site
+  @site_url "https://dieman.dev"
   @github_username "Dieman89"
+  @show_title_marker false
 
   # Date/Time
   @date_format "%b %d, %Y"
@@ -27,6 +29,7 @@ defmodule Dieman.Assets do
   @mermaid_script "/js/mermaid.js"
   @gist_script "/js/gist.js"
   @tweet_script "/js/tweet.js"
+  @share_script "/js/share.js"
 
   # Fonts
   @font_preconnect ["https://fonts.googleapis.com", "https://fonts.gstatic.com"]
@@ -34,7 +37,7 @@ defmodule Dieman.Assets do
 
   # Icons
   @svg_dir Path.expand("../static/svg", __DIR__)
-  @icon_names ~w(github linkedin rss calendar discord search eye pencil download home file folder user info warning lightbulb arrows_horizontal link gitlab youtube twitter file_document folder_open)a
+  @icon_names ~w(github linkedin rss calendar discord search eye pencil download home file folder user info warning lightbulb arrows_horizontal link gitlab youtube twitter file_document folder_open mastodon threads)a
 
   for name <- @icon_names do
     @external_resource Path.join(@svg_dir, "#{name}.svg")
@@ -44,9 +47,23 @@ defmodule Dieman.Assets do
            {name, File.read!(Path.join(@svg_dir, "#{name}.svg"))}
          end)
 
+  # Language Icons
+  @lang_svg_dir Path.expand("../static/svg/lang", __DIR__)
+  @lang_icon_names ~w(rust go python typescript javascript elixir java scala ruby swift kotlin csharp cpp c php haskell clojure erlang zig docker kubernetes terraform ansible helm prometheus grafana nginx redis postgresql mysql mongodb elasticsearch rabbitmq gcp aws azure)a
+
+  for name <- @lang_icon_names do
+    @external_resource Path.join(@lang_svg_dir, "#{name}.svg")
+  end
+
+  @lang_icons Map.new(@lang_icon_names, fn name ->
+                {name, File.read!(Path.join(@lang_svg_dir, "#{name}.svg"))}
+              end)
+
   # Accessors
+  def site_url, do: @site_url
   def github_username, do: @github_username
   def github_url(repo), do: "https://github.com/#{@github_username}/#{repo}"
+  def show_title_marker?, do: @show_title_marker
   def date_format, do: @date_format
   def default_post_time, do: @default_post_time
   def words_per_minute, do: @words_per_minute
@@ -65,7 +82,9 @@ defmodule Dieman.Assets do
   def mermaid_script, do: @mermaid_script
   def gist_script, do: @gist_script
   def tweet_script, do: @tweet_script
+  def share_script, do: @share_script
   def font_preconnect, do: @font_preconnect
   def font_stylesheet, do: @font_stylesheet
   def icon(name), do: @icons[name]
+  def lang_icon(name), do: @lang_icons[name]
 end

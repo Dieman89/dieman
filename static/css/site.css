@@ -638,7 +638,6 @@ div.single nav .nav-bottom a {
 div.single article {
   flex: 3;
   max-width: 700px;
-  padding-bottom: 0.8rem;
 }
 
 div.single article header {
@@ -706,6 +705,10 @@ div.single article header h1 {
   cursor: default;
 }
 
+body.no-marker div.single article header h1 {
+  text-decoration: none;
+}
+
 /* Post list */
 .post-list {
   display: flex;
@@ -753,6 +756,33 @@ div.single article header h1 {
 
 .post-item a:hover {
   color: var(--orange);
+}
+
+.post-languages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0;
+}
+
+.post-languages .lang-badge {
+  font-size: 0.7rem;
+  padding: 0.15em 0.5em;
+}
+
+.post-languages .lang-icon svg {
+  width: 0.85em;
+  height: 0.85em;
+}
+
+/* Post header languages */
+div.single article header .post-languages {
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+div.single article header .post-languages .lang-badge {
+  font-size: 0.75rem;
 }
 
 .empty {
@@ -2310,6 +2340,44 @@ pre.diff-content {
 .badge-orange {
   background: rgba(255, 150, 100, 0.12);
   color: rgba(255, 170, 130, 0.8);
+}
+
+/* Language badges */
+.lang-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.2em 0.6em;
+  font-size: 0.85em;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--fg-muted);
+  border-radius: 4px;
+  vertical-align: middle;
+  white-space: nowrap;
+  user-select: none;
+  cursor: default;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.lang-badge:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.lang-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lang-icon svg {
+  width: 1em;
+  height: 1em;
+  fill: var(--lang-color, var(--fg-muted));
+  opacity: 0.85;
 }
 
 /* Center wrapper */
@@ -4171,6 +4239,248 @@ kbd {
 
 .code-panel .copy-code-btn {
   z-index: 2;
+}
+
+/* Share buttons */
+.share-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--bg-1);
+}
+
+.share-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  padding: 0 1rem;
+}
+
+.share-label {
+  font-size: var(--text-xs);
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: default;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.share-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: absolute;
+  pointer-events: none;
+}
+
+.share-inner:hover .share-label {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.share-inner:hover .share-icons {
+  pointer-events: auto;
+}
+
+.share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 6px;
+  background: var(--bg-1);
+  color: var(--fg-muted);
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 0.15s ease,
+              color 0.15s ease;
+}
+
+/* Fan out from center - 5 icons */
+.share-btn:nth-child(1) {
+  transition-delay: 0.06s;
+  --fan-offset: 80px;
+}
+.share-btn:nth-child(2) {
+  transition-delay: 0.03s;
+  --fan-offset: 40px;
+}
+.share-btn:nth-child(3) {
+  transition-delay: 0s;
+  --fan-offset: 0px;
+}
+.share-btn:nth-child(4) {
+  transition-delay: 0.03s;
+  --fan-offset: -40px;
+}
+.share-btn:nth-child(5) {
+  transition-delay: 0.06s;
+  --fan-offset: -80px;
+}
+
+.share-icons .share-btn {
+  transform: scale(0) translateX(var(--fan-offset));
+}
+
+.share-inner:hover .share-btn {
+  opacity: 1;
+  transform: scale(1) translateX(0);
+}
+
+.share-btn:hover {
+  transform: scale(1.15) translateY(-2px) !important;
+}
+
+.share-btn svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+
+.share-btn-copy.copied {
+  background: var(--green);
+  color: var(--bg);
+}
+
+.share-btn-twitter:hover {
+  background: #1da1f2;
+  color: white;
+}
+
+.share-btn-threads:hover {
+  background: #000000;
+  color: white;
+}
+
+.share-btn-linkedin:hover {
+  background: #0077b5;
+  color: white;
+}
+
+.share-btn-mastodon:hover {
+  background: #6364ff;
+  color: white;
+}
+
+/* Mastodon modal */
+.mastodon-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.mastodon-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mastodon-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.mastodon-modal-content {
+  position: relative;
+  background: var(--bg);
+  border: 1px solid var(--bg-1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 360px;
+  transform: scale(0.95) translateY(10px);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mastodon-modal.active .mastodon-modal-content {
+  transform: scale(1) translateY(0);
+}
+
+.mastodon-modal-header {
+  font-size: var(--text-lg);
+  font-weight: 400;
+  color: var(--fg);
+  margin-bottom: 0.25rem;
+}
+
+.mastodon-modal-desc {
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+  margin: 0 0 1rem 0;
+}
+
+.mastodon-modal-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  background: var(--bg-0);
+  border: 1px solid var(--bg-1);
+  border-radius: 8px;
+  color: var(--fg);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.mastodon-modal-input:focus {
+  border-color: var(--purple);
+}
+
+.mastodon-modal-input::placeholder {
+  color: var(--fg-muted);
+}
+
+.mastodon-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.mastodon-modal-cancel,
+.mastodon-modal-confirm {
+  padding: 0.5rem 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.mastodon-modal-cancel {
+  background: transparent;
+  border: 1px solid var(--bg-1);
+  color: var(--fg-muted);
+}
+
+.mastodon-modal-cancel:hover {
+  background: var(--bg-1);
+  color: var(--fg-soft);
+}
+
+.mastodon-modal-confirm {
+  background: #6364ff;
+  border: 1px solid #6364ff;
+  color: white;
+}
+
+.mastodon-modal-confirm:hover {
+  background: #7879ff;
+  border-color: #7879ff;
 }
 
 /* Post footer stats */

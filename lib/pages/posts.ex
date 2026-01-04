@@ -10,6 +10,7 @@ defmodule Dieman.Pages.Posts do
 
   alias Dieman.Assets
   alias Dieman.Content
+  alias Dieman.Markdown.Components.Language
 
   def template(assigns) do
     temple do
@@ -17,6 +18,8 @@ defmodule Dieman.Pages.Posts do
 
       div class: "post-list" do
         for post <- @posts do
+          languages = Language.extract_languages(post[:body] || "")
+
           article class: "post-item" do
             div class: "post-meta" do
               time(do: Calendar.strftime(post.date, Assets.date_format()))
@@ -24,6 +27,12 @@ defmodule Dieman.Pages.Posts do
             end
 
             a(href: post.permalink, do: post.title)
+
+            if languages != [] do
+              div class: "post-languages" do
+                Phoenix.HTML.raw(Language.render_badges(languages))
+              end
+            end
           end
         end
       end

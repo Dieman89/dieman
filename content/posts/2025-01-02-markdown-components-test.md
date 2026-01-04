@@ -227,6 +227,30 @@ Inline labels for versions and status: ::badge[v2.0.0]{green} ::badge[deprecated
 
 You can also use plain badges: ::badge[MIT License] ::badge[TypeScript]
 
+## Language Badges
+
+Display programming languages with their icon and brand color:
+
+::lang[Rust] ::lang[Go] ::lang[Python] ::lang[TypeScript] ::lang[JavaScript] ::lang[Elixir]
+
+More languages:
+
+::lang[Java] ::lang[Scala] ::lang[Ruby] ::lang[Swift] ::lang[Kotlin] ::lang[C#] ::lang[C++] ::lang[C] ::lang[PHP]
+
+::lang[Haskell] ::lang[Clojure] ::lang[Erlang] ::lang[Zig]
+
+DevOps & Infrastructure:
+
+::lang[Docker] ::lang[Kubernetes] ::lang[Terraform] ::lang[Ansible] ::lang[Helm] ::lang[Prometheus] ::lang[Grafana] ::lang[Nginx]
+
+Databases:
+
+::lang[Redis] ::lang[PostgreSQL] ::lang[MySQL] ::lang[MongoDB] ::lang[Elasticsearch] ::lang[RabbitMQ]
+
+Cloud:
+
+::lang[AWS] ::lang[Azure] ::lang[GCP]
+
 ## Tooltips
 
 Inline hover definitions for technical terms: Working with ::def[IAM]{Identity and Access Management} policies in ::def[K8s]{Kubernetes container orchestration} clusters requires understanding ::def[RBAC]{Role-Based Access Control}.

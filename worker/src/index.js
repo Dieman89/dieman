@@ -1,8 +1,4 @@
-const ALLOWED_ORIGINS = [
-  "https://dieman.dev",
-  "http://localhost:4999",
-  "http://localhost:4000",
-];
+const ALLOWED_ORIGINS = ["https://dieman.dev"];
 
 function getCorsHeaders(origin) {
   return {

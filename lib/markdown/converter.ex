@@ -16,6 +16,7 @@ defmodule Dieman.Markdown.Converter do
   - `::quote[author]...::` - Quotes with attribution
   - `::diff...::` - Diff blocks
   - `::badge[text]{color}` - Inline badges
+  - `::lang[Language]` - Programming language with icon (Rust, Go, Python, etc.)
   - `::link{url|title}` - Link cards
   - `::timeline...::` - Chronological timeline
   - `::compare-images{before|after|labelBefore|labelAfter}` - Image comparison slider
@@ -45,6 +46,7 @@ defmodule Dieman.Markdown.Converter do
     Grid,
     ImageCompare,
     Keyboard,
+    Language,
     LinkCard,
     Mark,
     Mermaid,
@@ -100,6 +102,7 @@ defmodule Dieman.Markdown.Converter do
     |> Figure.process()
     |> ImageCompare.process()
     |> Badge.process()
+    |> Language.process()
     |> StatCard.process()
     |> LinkCard.process()
     |> Tooltip.process()
