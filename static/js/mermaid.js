@@ -8,7 +8,7 @@
   const get = (v) => style.getPropertyValue(v).trim();
 
   mermaid.initialize({
-    startOnLoad: true,
+    startOnLoad: false,
     theme: 'base',
     flowchart: { curve: 'basis', padding: 20 },
     themeVariables: {
@@ -60,4 +60,6 @@
       sequenceNumberColor: get('--bg')
     }
   });
+
+  await mermaid.run({ nodes: mermaidDivs });
 })();
