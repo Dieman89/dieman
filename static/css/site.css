@@ -3286,7 +3286,6 @@ article img, article iframe, article video {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 5rem;
 }
 
 .cv-captcha-text {
@@ -3656,6 +3655,11 @@ article img, article iframe, article video {
     text-align: center;
     padding: 0 1rem 0.75rem 1rem;
     z-index: 100;
+    background: var(--bg);
+  }
+
+  body.page-cv .site-footer {
+    position: static;
   }
 
   .site-footer .social-links {
