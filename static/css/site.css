@@ -3656,6 +3656,12 @@ article img, article iframe, article video {
     z-index: 100;
   }
 
+  /* CV page - footer scrolls with content */
+  body.page-cv .site-footer {
+    position: static;
+    background: none;
+  }
+
   .site-footer .social-links {
     display: flex;
     margin-bottom: 0.75rem;
