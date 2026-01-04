@@ -24,6 +24,7 @@ defmodule Dieman.MixProject do
       {:tableau, "~> 0.28"},
       {:temple, "~> 0.14.1"},
       {:vix, "~> 0.31"},
+      {:req, "~> 0.5"},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end

@@ -26,6 +26,7 @@ defmodule Dieman.Assets do
   @post_stats_script "/js/post-stats.js"
   @mermaid_script "/js/mermaid.js"
   @gist_script "/js/gist.js"
+  @tweet_script "/js/tweet.js"
 
   # Fonts
   @font_preconnect ["https://fonts.googleapis.com", "https://fonts.gstatic.com"]
@@ -63,6 +64,7 @@ defmodule Dieman.Assets do
   def post_stats_script, do: @post_stats_script
   def mermaid_script, do: @mermaid_script
   def gist_script, do: @gist_script
+  def tweet_script, do: @tweet_script
   def font_preconnect, do: @font_preconnect
   def font_stylesheet, do: @font_stylesheet
   def icon(name), do: @icons[name]

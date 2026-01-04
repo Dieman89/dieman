@@ -331,3 +331,39 @@ Supported runtimes: ::badge[Node 18+]{green} ::badge[Deno]{blue} ::badge[Bun]{ye
 
 Use [[Cmd+Shift+V]] to check your current version.
 ::
+
+## Dividers
+
+Horizontal rules with centered text:
+
+::divider[Section Break]
+
+Some content between dividers.
+
+::divider[Next Chapter]
+
+## Highlights
+
+Mark ::mark[important text] in your content. You can also use colors:
+
+- ::mark[Default yellow]{yellow} highlight
+- ::mark[Orange]{orange} for warnings
+- ::mark[Green]{green} for success
+- ::mark[Blue]{blue} for info
+- ::mark[Purple]{purple} for special
+- ::mark[Red]{red} for critical
+
+## Small Caps
+
+Use small caps for abbreviations like ::sc[HTML], ::sc[CSS], and ::sc[API]. They work great for acronyms like ::sc[REST] or ::sc[GraphQL].
+
+## Tweet Embed
+
+Video tweet:
+::tweet{https://x.com/Dieman_/status/1633352831511023616}
+
+Text only tweet:
+::tweet{https://x.com/Dieman_/status/1534779818339885058}
+
+Image tweet:
+::tweet{https://x.com/Dieman_/status/1474516364434022402}

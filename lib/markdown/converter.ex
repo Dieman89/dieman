@@ -24,6 +24,10 @@ defmodule Dieman.Markdown.Converter do
   - `::def[term]{definition}` - Inline tooltip definitions
   - ` ```mermaid ``` ` - Mermaid diagrams (flowcharts, sequence diagrams)
   - `::gist{user/id}` - GitHub Gist embed
+  - `::divider[text]` - Horizontal rule with centered text
+  - `::mark[text]` or `::mark[text]{color}` - Highlight/marker
+  - `::sc[TEXT]` - Small caps for abbreviations
+  - `::tweet{id}` - Embed X/Twitter tweet
   """
 
   alias Dieman.Markdown.Components.{
@@ -34,6 +38,7 @@ defmodule Dieman.Markdown.Converter do
     Comparison,
     Details,
     Diff,
+    Divider,
     Figure,
     FileTree,
     Gist,
@@ -41,13 +46,16 @@ defmodule Dieman.Markdown.Converter do
     ImageCompare,
     Keyboard,
     LinkCard,
+    Mark,
     Mermaid,
     Quote,
+    SmallCaps,
     StatCard,
     Steps,
     Terminal,
     Timeline,
     Tooltip,
+    X,
     Youtube
   }
 
@@ -66,6 +74,7 @@ defmodule Dieman.Markdown.Converter do
     |> Terminal.process()
     |> Diff.process()
     |> Mermaid.process()
+    |> X.pre_process()
     |> Grid.pre_process()
     |> Center.pre_process()
     |> Steps.pre_process()
@@ -95,6 +104,10 @@ defmodule Dieman.Markdown.Converter do
     |> LinkCard.process()
     |> Tooltip.process()
     |> Gist.process()
+    |> Divider.process()
+    |> Mark.process()
+    |> SmallCaps.process()
+    |> X.post_process()
   end
 
   defp validate_closed_blocks(body, filepath) do
