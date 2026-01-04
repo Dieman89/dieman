@@ -2676,7 +2676,8 @@ pre.diff-content {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease, visibility 0.2s ease;
-  max-width: min(300px, 90vw);
+  max-width: none;
+  width: max-content;
   text-align: center;
   z-index: 100;
   pointer-events: none;
@@ -3660,6 +3661,13 @@ article img, article iframe, article video {
 
   body.page-cv .site-footer {
     position: static;
+  }
+
+  .tooltip::after {
+    max-width: min(250px, 80vw);
+    width: auto;
+    white-space: normal;
+    text-align: center;
   }
 
   .site-footer .social-links {
