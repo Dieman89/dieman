@@ -21,6 +21,9 @@ defmodule Dieman.Markdown.Converter do
   - `::compare-images{before|after|labelBefore|labelAfter}` - Image comparison slider
   - `::stat[value]{label}` - Stats cards
   - `::grid...::` or `::grid[n]...::` - Generic grid wrapper for any components
+  - `::def[term]{definition}` - Inline tooltip definitions
+  - ` ```mermaid ``` ` - Mermaid diagrams (flowcharts, sequence diagrams)
+  - `::gist{user/id}` - GitHub Gist embed
   """
 
   alias Dieman.Markdown.Components.{
@@ -33,15 +36,18 @@ defmodule Dieman.Markdown.Converter do
     Diff,
     Figure,
     FileTree,
+    Gist,
     Grid,
     ImageCompare,
     Keyboard,
     LinkCard,
+    Mermaid,
     Quote,
     StatCard,
     Steps,
     Terminal,
     Timeline,
+    Tooltip,
     Youtube
   }
 
@@ -59,6 +65,7 @@ defmodule Dieman.Markdown.Converter do
     |> FileTree.process()
     |> Terminal.process()
     |> Diff.process()
+    |> Mermaid.process()
     |> Grid.pre_process()
     |> Center.pre_process()
     |> Steps.pre_process()
@@ -70,6 +77,7 @@ defmodule Dieman.Markdown.Converter do
     # Markdown to HTML
     |> MDEx.to_html!(config.markdown[:mdex])
     # Post-markdown processing
+    |> Mermaid.post_process()
     |> Grid.post_process()
     |> Center.post_process()
     |> Steps.post_process()
@@ -85,6 +93,8 @@ defmodule Dieman.Markdown.Converter do
     |> Badge.process()
     |> StatCard.process()
     |> LinkCard.process()
+    |> Tooltip.process()
+    |> Gist.process()
   end
 
   defp validate_closed_blocks(body, filepath) do

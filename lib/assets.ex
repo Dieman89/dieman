@@ -24,6 +24,8 @@ defmodule Dieman.Assets do
   @youtube_facade_script "/js/youtube-facade.js"
   @image_compare_script "/js/image-compare.js"
   @post_stats_script "/js/post-stats.js"
+  @mermaid_script "/js/mermaid.js"
+  @gist_script "/js/gist.js"
 
   # Fonts
   @font_preconnect ["https://fonts.googleapis.com", "https://fonts.gstatic.com"]
@@ -59,6 +61,8 @@ defmodule Dieman.Assets do
   def youtube_facade_script, do: @youtube_facade_script
   def image_compare_script, do: @image_compare_script
   def post_stats_script, do: @post_stats_script
+  def mermaid_script, do: @mermaid_script
+  def gist_script, do: @gist_script
   def font_preconnect, do: @font_preconnect
   def font_stylesheet, do: @font_stylesheet
   def icon(name), do: @icons[name]

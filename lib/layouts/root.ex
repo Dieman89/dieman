@@ -148,6 +148,8 @@ defmodule Dieman.RootLayout do
             script(src: Assets.back_to_top_script())
             script(src: Assets.like_heart_script())
             script(src: Assets.post_stats_script())
+            script(type: "module", src: Assets.mermaid_script())
+            script(src: Assets.gist_script())
           end
 
           Dieman.analytics()

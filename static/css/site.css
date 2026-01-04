@@ -45,7 +45,7 @@
   --text-2xl: 1.5rem;
   --text-3xl: 2rem;
   --text-component: 0.75rem;
-  --text-code: 0.7rem;
+  --text-code: 0.8125rem;
   --font-weight-body: 200;
 }
 
@@ -1187,12 +1187,13 @@ article pre {
 
 article pre code {
   background: none;
-  padding: 0.5rem;
-  padding-top: 2.25rem;
-  padding-left: 0.5rem;
+  padding: 0.5rem 10px;
+  padding-top: 2.75rem;
   display: block;
   overflow-x: auto;
-  font-size: var(--text-code);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 article pre code::before {
@@ -1200,14 +1201,14 @@ article pre code::before {
   top: 0;
   left: 0;
   right: 0;
-  padding: 0.4rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 0.65rem;
   font-weight: 500;
-  color: var(--fg-muted);
+  color: var(--fg-soft);
   text-transform: lowercase;
   letter-spacing: 0.05em;
-  background: var(--bg-0);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--bg-1);
+  border-bottom: 1px solid var(--bg-2);
 }
 
 article pre code.language-go::before { content: "go"; }
@@ -1262,15 +1263,13 @@ article pre code .line:hover {
 article pre code .line::before {
   content: attr(data-line);
   display: inline-block;
-  min-width: 0.8rem;
-  margin-right: 0.75rem;
-  padding-right: 0.5rem;
+  min-width: 2rem;
+  margin-right: 10px;
+  padding-right: 15px;
   text-align: right;
-  color: var(--fg-muted);
-  opacity: 0.3;
-  font-size: 0.9em;
+  color: var(--fg-dim);
+  font-size: 12px;
   user-select: none;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 article pre code ::selection {
@@ -1446,7 +1445,7 @@ article pre code ::selection {
 /* Copy code button */
 .copy-code-btn {
   position: absolute;
-  top: 0.4rem;
+  top: 0.5rem;
   right: 0.75rem;
   width: 16px;
   height: 16px;
@@ -1454,10 +1453,10 @@ article pre code ::selection {
   background: transparent;
   border: none;
   border-radius: 0;
-  color: var(--fg-muted);
+  color: var(--fg-dim);
   cursor: pointer;
-  opacity: 0.4;
-  transition: opacity 0.2s ease, color 0.2s ease;
+  opacity: 1;
+  transition: color 0.2s ease;
 }
 
 .copy-code-btn svg {
@@ -1465,18 +1464,12 @@ article pre code ::selection {
   height: 100%;
 }
 
-article pre:hover .copy-code-btn {
-  opacity: 0.5;
-}
-
 .copy-code-btn:hover {
-  opacity: 1 !important;
-  color: var(--fg);
+  color: var(--fg-soft);
 }
 
 .copy-code-btn.copied {
   color: var(--green);
-  opacity: 1 !important;
 }
 
 /* Back to top button - aligned with article right edge */
@@ -2398,6 +2391,159 @@ pre.diff-content {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-top: 0.25rem;
+}
+
+/* Mermaid Diagrams */
+.mermaid {
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: var(--bg);
+  border: var(--component-border);
+  border-radius: 8px;
+  text-align: center;
+  overflow-x: auto;
+  transition: border-color 0.2s ease;
+}
+
+.mermaid:hover {
+  border-color: var(--bg-2);
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* GitHub Gist Embed */
+.gist-embed {
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg);
+  border: var(--component-border);
+  transition: border-color 0.2s ease;
+  min-height: 100px;
+  padding: 1px;
+}
+
+.gist-embed:hover {
+  border-color: var(--bg-2);
+}
+
+.gist-embed .gist-iframe {
+  width: 100%;
+  border: none;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gist-embed.loaded .gist-iframe {
+  opacity: 1;
+}
+
+.gist-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: var(--bg-1);
+  border-bottom: 1px solid var(--bg-2);
+}
+
+.gist-header-filename {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-sm);
+  color: var(--fg-soft);
+}
+
+.gist-copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--fg-dim);
+  transition: color 0.2s ease;
+  outline: none;
+}
+
+.gist-copy:hover {
+  color: var(--fg-soft);
+}
+
+.gist-copy.copied {
+  color: var(--green);
+}
+
+.gist-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: var(--bg-1);
+  border-top: 1px solid var(--bg-2);
+  font-size: var(--text-xs);
+  color: var(--fg-muted);
+}
+
+.gist-footer a {
+  color: var(--fg-soft);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.gist-footer a:hover {
+  color: var(--orange);
+}
+
+.gist-author {
+  color: var(--fg-dim);
+}
+
+.gist-link {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--fg-muted);
+}
+
+.gist-link svg {
+  flex-shrink: 0;
+}
+
+/* Tooltip */
+.tooltip {
+  position: relative;
+  border-bottom: 1px dotted var(--fg-muted);
+  cursor: help;
+}
+
+.tooltip::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  padding: 0.4rem 0.6rem;
+  background: var(--bg-1);
+  color: var(--fg-soft);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  border-radius: 4px;
+  border: 1px solid var(--bg-2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Steps */
@@ -3635,13 +3781,13 @@ kbd {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.4rem 1rem;
+  padding: 0.5rem 1rem;
   font-family: var(--font-mono);
   font-size: 0.65rem;
   font-weight: 500;
   letter-spacing: 0.05em;
-  background: var(--bg-0);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--bg-1);
+  border-bottom: 1px solid var(--bg-2);
   border-radius: 8px 8px 0 0;
   z-index: 1;
 }
@@ -3651,7 +3797,7 @@ kbd {
   background: transparent;
   border: none;
   border-bottom: 1px solid transparent;
-  color: var(--fg-muted);
+  color: var(--fg-dim);
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
@@ -3662,11 +3808,11 @@ kbd {
 }
 
 .code-tab:hover {
-  color: var(--fg);
+  color: var(--fg-soft);
 }
 
 .code-tab.active {
-  color: var(--fg);
+  color: var(--fg-soft);
   border-bottom-color: var(--orange);
 }
 
@@ -3683,7 +3829,7 @@ kbd {
 }
 
 .code-panel pre code {
-  padding-top: 2.5rem;
+  padding-top: 2.75rem;
 }
 
 .code-panel pre code::before {

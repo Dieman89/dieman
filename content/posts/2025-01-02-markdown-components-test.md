@@ -227,6 +227,41 @@ Inline labels for versions and status: ::badge[v2.0.0]{green} ::badge[deprecated
 
 You can also use plain badges: ::badge[MIT License] ::badge[TypeScript]
 
+## Tooltips
+
+Inline hover definitions for technical terms: Working with ::def[IAM]{Identity and Access Management} policies in ::def[K8s]{Kubernetes container orchestration} clusters requires understanding ::def[RBAC]{Role-Based Access Control}.
+
+## Mermaid Diagrams
+
+Flowcharts and diagrams rendered inline:
+
+```mermaid
+graph LR
+    A[Request] --> B{Auth?}
+    B -->|Yes| C[Process]
+    B -->|No| D[401]
+    C --> E[Response]
+```
+
+Sequence diagrams:
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant API
+    participant DB
+    Client->>API: GET /users
+    API->>DB: SELECT * FROM users
+    DB-->>API: Results
+    API-->>Client: JSON Response
+```
+
+## GitHub Gist
+
+Embed GitHub Gists with syntax highlighting:
+
+::gist{Dieman89/7d224f6a27ac222ada1af07b607d5c6f}
+
 ## Stats Cards
 
 Display metrics with prominent values. Use `::grid` for full-width grid:
