@@ -10,7 +10,7 @@ defmodule Dieman.Markdown.Components.Tooltip do
 
   def process(html) when is_binary(html) do
     Regex.replace(~r/::def\[([^\]]+)\]\{([^}]+)\}/, html, fn _, term, definition ->
-      ~s(<span class="tooltip" data-tip="#{definition}">#{term}</span>)
+      ~s(<span class="tooltip" data-tip="#{definition}"><code>#{term}</code></span>)
     end)
   end
 

@@ -1548,30 +1548,40 @@ article blockquote {
 
 article table {
   width: 100%;
-  border-collapse: collapse;
   margin: 1.5rem 0;
   font-size: var(--text-component);
+  background: var(--bg);
   border: var(--component-border);
   box-shadow: var(--component-shadow);
   border-radius: 8px;
+  border-collapse: separate;
+  border-spacing: 0;
   overflow: hidden;
 }
 
 article th,
 article td {
-  padding: 0.6rem 1rem;
+  padding: 0.75rem 1rem;
   text-align: left;
   border-bottom: 1px solid var(--bg-2);
 }
 
 article th {
-  color: var(--fg);
-  font-weight: 700;
+  color: var(--fg-soft);
+  font-weight: 500;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   background: var(--bg-1);
-  border-bottom: 2px solid var(--orange);
+  border-bottom: 2px solid var(--bg-2);
+  padding: 0.6rem 1rem;
 }
 
-article tr:hover {
+article tr:last-child td {
+  border-bottom: none;
+}
+
+article tbody tr:hover {
   background: var(--bg-1);
 }
 
@@ -2461,6 +2471,27 @@ pre.diff-content {
   margin-top: 0.25rem;
 }
 
+.stat-green {
+  border-color: rgba(173, 218, 120, 0.3);
+}
+.stat-green .stat-value {
+  color: var(--green);
+}
+
+.stat-red {
+  border-color: rgba(255, 133, 133, 0.3);
+}
+.stat-red .stat-value {
+  color: var(--red);
+}
+
+.stat-yellow {
+  border-color: rgba(249, 204, 108, 0.3);
+}
+.stat-yellow .stat-value {
+  color: var(--yellow);
+}
+
 /* Mermaid Diagrams */
 .mermaid {
   margin: 1.5rem auto;
@@ -2471,7 +2502,6 @@ pre.diff-content {
   text-align: center;
   overflow-x: auto;
   transition: border-color 0.2s ease;
-  max-width: 500px;
 }
 
 .mermaid:hover {
@@ -2480,7 +2510,7 @@ pre.diff-content {
 
 .mermaid svg {
   max-width: 100%;
-  max-height: 250px;
+  max-height: 400px;
   height: auto;
 }
 
@@ -2587,8 +2617,48 @@ pre.diff-content {
 /* Tooltip */
 .tooltip {
   position: relative;
-  border-bottom: 1px dotted var(--fg-muted);
   cursor: help;
+}
+
+.tooltip code {
+  position: relative;
+  border-bottom: 1px dotted var(--fg-muted);
+}
+
+.tooltip code::after {
+  content: "?";
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  font-size: 0.55em;
+  font-weight: 700;
+  color: var(--fg-muted);
+  background: var(--bg);
+  width: 1.3em;
+  height: 1.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--fg-muted);
+  animation: tooltip-hint 2.5s ease-in-out infinite;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.tooltip.seen code::after {
+  display: none;
+}
+
+.tooltip:hover code::after {
+  opacity: 0;
+}
+
+@keyframes tooltip-hint {
+  0%, 20%, 100% { transform: rotate(0deg); }
+  5% { transform: rotate(-15deg); }
+  10% { transform: rotate(15deg); }
+  15% { transform: rotate(-10deg); }
 }
 
 .tooltip::after {

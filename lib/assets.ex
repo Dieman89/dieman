@@ -30,6 +30,7 @@ defmodule Dieman.Assets do
   @gist_script "/js/gist.js"
   @tweet_script "/js/tweet.js"
   @share_script "/js/share.js"
+  @tooltip_script "/js/tooltip.js"
 
   # Fonts
   @font_preconnect ["https://fonts.googleapis.com", "https://fonts.gstatic.com"]
@@ -83,6 +84,7 @@ defmodule Dieman.Assets do
   def gist_script, do: @gist_script
   def tweet_script, do: @tweet_script
   def share_script, do: @share_script
+  def tooltip_script, do: @tooltip_script
   def font_preconnect, do: @font_preconnect
   def font_stylesheet, do: @font_stylesheet
   def icon(name), do: @icons[name]

@@ -154,6 +154,7 @@ defmodule Dieman.RootLayout do
             script(src: Assets.gist_script())
             script(src: Assets.tweet_script())
             script(src: Assets.share_script())
+            script(src: Assets.tooltip_script())
           end
 
           Dieman.analytics()
