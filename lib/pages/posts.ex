@@ -12,12 +12,23 @@ defmodule Dieman.Pages.Posts do
   alias Dieman.Content
   alias Dieman.Markdown.Components.Language
 
+  @env Mix.env()
+
   def template(assigns) do
+    all_posts = assigns[:posts] || []
+
+    posts =
+      if @env == :prod do
+        Enum.filter(all_posts, &(Map.get(&1, :listed, true) != false))
+      else
+        all_posts
+      end
+
     temple do
       floating_symbols()
 
       div class: "post-list" do
-        for post <- @posts do
+        for post <- posts do
           languages = Language.extract_languages(post[:body] || "")
 
           article class: "post-item" do
@@ -37,7 +48,7 @@ defmodule Dieman.Pages.Posts do
         end
       end
 
-      if Enum.empty?(@posts) do
+      if Enum.empty?(posts) do
         p(class: "empty", do: Content.no_posts())
       end
     end
