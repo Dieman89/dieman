@@ -11,7 +11,8 @@ async function onCaptchaSuccess(token) {
 }
 
 function showCV(cvUrl) {
-  document.getElementById('cv-locked').style.display = 'none';
+  const locked = document.getElementById('cv-locked');
+  if (locked) locked.remove();
   document.getElementById('cv-unlocked').style.display = 'flex';
   const embed = document.querySelector('.cv-embed');
   const downloadLink = document.querySelector('.cv-download');

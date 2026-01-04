@@ -3812,10 +3812,11 @@ article img, article iframe, article video {
     padding: 0 0.8rem 1.5rem 0.8rem;
   }
 
-  /* Article/Single/Projects pages - site-footer at end of content */
+  /* Article/Single/Projects/CV pages - site-footer at end of content */
   body.page-article,
   body.page-single,
-  body.page-projects {
+  body.page-projects,
+  body.page-cv {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -3823,13 +3824,15 @@ article img, article iframe, article video {
 
   body.page-article div.single,
   body.page-single div.single,
-  body.page-projects div.single {
+  body.page-projects div.single,
+  body.page-cv div.single {
     flex: 1;
   }
 
   body.page-article .site-footer,
   body.page-single .site-footer,
-  body.page-projects .site-footer {
+  body.page-projects .site-footer,
+  body.page-cv .site-footer {
     position: static;
     padding: 0 1rem 1rem 1rem;
   }
