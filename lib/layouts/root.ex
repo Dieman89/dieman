@@ -78,8 +78,9 @@ defmodule Dieman.RootLayout do
     description = assigns[:page][:description] || "#{Content.name()} - #{hd(Content.taglines())}"
     url = Dieman.absolute_url(assigns[:page][:permalink] || "/")
     image = og_image(assigns)
+    page_type = page_class(assigns)
     marker_class = if Assets.show_title_marker?(), do: "", else: "no-marker"
-    body_class = String.trim("#{page_class(assigns)} #{marker_class}")
+    body_class = String.trim("#{page_type} #{marker_class}")
 
     temple do
       "<!DOCTYPE html>"
@@ -139,7 +140,7 @@ defmodule Dieman.RootLayout do
 
           script(src: Assets.glitch_script())
 
-          if body_class == "page-article" do
+          if page_type == "page-article" do
             script(src: Assets.toc_script())
             script(src: Assets.progress_script())
             script(src: Assets.copy_code_script())
