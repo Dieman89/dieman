@@ -148,7 +148,7 @@ Go is **10x faster**. Zero dependencies means no download time, no resolution, n
 ## The Trade-off
 
 | Aspect | Go | Scala |
-|--------|-----|-------|
+ |--------|-----|-------|
 | Learning curve | ::badge[Weekend]{green} | ::badge[Months]{red} |
 | Feedback loop | ::badge[Fast]{green} | ::badge[Slow]{red} |
 | Type safety | ::badge[Basic]{red} | ::badge[Advanced]{green} |

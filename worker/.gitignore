@@ -1,2 +1,5 @@
 .wrangler
 node_modules
+target
+build
+Cargo.lock
