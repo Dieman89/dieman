@@ -27,7 +27,8 @@ defmodule Dieman.Content do
   @nav_links [
     %{href: "/posts", label: "/posts"},
     %{href: "/projects", label: "/projects"},
-    %{href: "/cv", label: "/cv"}
+    %{href: "/cv", label: "/cv"},
+    %{href: "/irc", label: "/irc"}
   ]
 
   @social_links [
