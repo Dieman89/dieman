@@ -66,8 +66,8 @@ defmodule Dieman.Content do
       image: "/images/projects/nocturne.png",
       repo: "https://nocturne.cv",
       date: ~D[2025-01-11],
-      tags: ["SaaS", "Developer Tools"],
-      tech: ["Elixir", "Phoenix"]
+      tags: ["SaaS"],
+      tech: ["Elixir"]
     },
     %{
       title: "Systems",
