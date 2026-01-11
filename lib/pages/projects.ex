@@ -53,9 +53,16 @@ defmodule Dieman.Pages.Projects do
                   Calendar.strftime(project.date, Assets.date_format())
                 end
 
-                a href: project.repo, class: "project-repo", target: "_blank" do
-                  Phoenix.HTML.raw(Assets.icon(:github))
-                  span(do: "View on GitHub")
+                if String.contains?(project.repo, "github") do
+                  a href: project.repo, class: "project-repo", target: "_blank" do
+                    Phoenix.HTML.raw(Assets.icon(:github))
+                    span(do: "View on GitHub")
+                  end
+                else
+                  a href: project.repo, class: "project-repo", target: "_blank" do
+                    Phoenix.HTML.raw(Assets.icon(:link))
+                    span(do: "View Website")
+                  end
                 end
               end
             end

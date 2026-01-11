@@ -60,6 +60,16 @@ defmodule Dieman.Content do
   # Projects
   @projects [
     %{
+      title: "Nocturne",
+      description:
+        "A CV builder for developers with live preview, dark/light themes, PDF export, and ATS optimization.",
+      image: "/images/projects/nocturne.png",
+      repo: "https://nocturne.cv",
+      date: ~D[2025-01-11],
+      tags: ["SaaS", "Developer Tools"],
+      tech: ["Elixir", "Phoenix"]
+    },
+    %{
       title: "Systems",
       description: "Declarative macOS configuration using nix-darwin and home-manager.",
       image: "/images/projects/systems.png",
