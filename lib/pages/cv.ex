@@ -10,14 +10,12 @@ defmodule Dieman.Pages.Cv do
 
   def template(_assigns) do
     temple do
-      div class: "cv-viewer", style: "background-color: #2C2525;" do
-        iframe(
-          src: "https://nocturne.cv/u/dieman/embed?style=preview&bg=2C2525",
-          width: "350",
-          height: "565",
-          frameborder: "0"
-        )
-      end
+      iframe(
+        src: "https://nocturne.cv/u/dieman/embed?style=preview&bg=2C2525",
+        width: "350",
+        height: "565",
+        frameborder: "0"
+      )
     end
   end
 end
