@@ -33,5 +33,5 @@ Test locally:
 curl localhost:8787/api/hearts/my-post         # get count
 curl -X POST localhost:8787/api/hearts/my-post # increment
 curl localhost:8787/api/views/my-post          # get views
-curl -X POST localhost:8787/api/views/my-post  # increment views
+curl -X POST localhost:8787/api/views/my-post  # increment view
 ```
